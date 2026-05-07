@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <title>ZIGZEX IT SERVICES | Enterprise Digital Transformation</title>
+    <meta name="title" content="ZIGZEX IT SERVICES | Enterprise Digital Transformation">
+    <meta name="description" content="ZIGZEX IT SERVICES PRIVATE LIMITED - Enterprise Digital Engineering & IT Solutions. Specializing in SaaS, Cloud Migration, AI Solutions, and Full-Stack Development.">
+    <meta name="keywords" content="ZIGZEX, IT Services, Enterprise Digital Transformation, Software Engineering, Cloud Migration, AI Solutions, Full-Stack Dev, Cybersecurity, Visakhapatnam IT Company">
+    <meta name="author" content="ZIGZEX IT SERVICES">
+    <link rel="canonical" href="https://www.zigzexitservices.com/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.zigzexitservices.com/">
+    <meta property="og:title" content="ZIGZEX IT SERVICES | Enterprise Digital Transformation">
+    <meta property="og:description" content="ZIGZEX IT SERVICES PRIVATE LIMITED - Enterprise Digital Engineering & IT Solutions. Building scalable, future-proof enterprise architecture.">
+    <meta property="og:image" content="https://www.zigzexitservices.com/image.png">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.zigzexitservices.com/">
+    <meta property="twitter:title" content="ZIGZEX IT SERVICES | Enterprise Digital Transformation">
+    <meta property="twitter:description" content="ZIGZEX IT SERVICES PRIVATE LIMITED - Enterprise Digital Engineering & IT Solutions. Building scalable, future-proof enterprise architecture.">
+    <meta property="twitter:image" content="./image.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="shortcut icon" href="./image.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./src/index.css">
+    <style>
+        
+        * { transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s; }
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            padding-bottom: env(safe-area-inset-bottom, 70px);
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior-y: none; /* App feel */
+        }
+        @media (min-width: 768px) { body { padding-bottom: 0; } }
+        
+        @keyframes slideUpFade {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .bg-pattern {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background:
+                linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px),
+                linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1; pointer-events: none;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .counter { font-variant-numeric: tabular-nums; }
+        
+        .testimonial-container {
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .testimonial-container::-webkit-scrollbar { display: none; }
+        .testimonial-card { scroll-snap-align: center; flex: 0 0 auto; }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .parallax-slow { animation: float 20s ease-in-out infinite; }
+    
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#4f46e5', 700: '#4338ca', 900: '#312e81', 950: '#1e1b4b' },
+                        accent: { 500: '#a855f7', 600: '#9333ea' }
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'marquee': 'marquee 40s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%, 100%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                        },
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        glow: {
+                            '0%, 100%': { opacity: '0.5' },
+                            '50%': { opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+  
+</head>
+<body class="selection:bg-brand-600 selection:text-white">
+    <div class="bg-pattern"></div>
+    <nav class="sticky top-0 z-50 glass py-3 lg:py-4">
+        <div class="max-w-[90rem] mx-auto px-4 md:px-8 flex items-center justify-between">
+            <div class="flex items-center gap-x-3 cursor-pointer" onclick="smoothScrollTo('hero')">
+                <div class="w-10 h-10 bg-gradient-to-br from-brand-600 to-accent-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg"><img src="./image.png" alt="" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                <h1 class="font-heading text-xl md:text-2xl font-extrabold tracking-tight text-slate-900">ZIGZEX<span class="text-brand-600"></span></h1>
+            </div>
+            
+            <div class="hidden lg:flex items-center gap-x-6 xl:gap-x-8 text-sm font-semibold text-slate-600">
+                <a href="#about" class="hover:text-brand-600 transition-colors">About</a>
+                <a href="#experience" class="hover:text-brand-600 transition-colors">Experience</a>
+                <a href="#services" class="hover:text-brand-600 transition-colors">Services</a>
+                <a href="#api-projects" class="hover:text-brand-600 transition-colors text-brand-600">Live Projects</a>
+                <a href="#process" class="hover:text-brand-600 transition-colors">Process</a>
+                <a href="#whyus" class="hover:text-brand-600 transition-colors">Why Us</a>
+                <a href="#tech-stack" class="hover:text-brand-600 transition-colors">Tech Stack</a>
+            </div>
+             <a href="https://www.zigzex.com/contactus.html" target="_blank">
+            <div class="hidden md:flex items-center gap-x-4">
+               
+                    <button  class="px-6 py-2.5 bg-brand-950 text-white text-sm font-bold rounded-lg shadow-md hover:bg-brand-800 transition-colors">
+                    Get in Touch
+                </button>
+             
+            </div>
+               </a>
+        </div>
+    </nav>
+    <nav class="md:hidden fixed bottom-0 left-0 w-full bg-white border-t border-slate-200 shadow-[0_-5px_20px_rgba(0,0,0,0.08)] z-50">
+        <div class="flex justify-around items-center py-2 px-2 pb-6">
+            <a href="#hero" class="flex flex-col items-center p-2 text-slate-400 hover:text-brand-600">
+                <i class="fa-solid fa-house text-lg mb-1"></i><span class="text-[9px] font-bold">Home</span>
+            </a>
+            <a href="#services" class="flex flex-col items-center p-2 text-slate-400 hover:text-brand-600">
+                <i class="fa-solid fa-layer-group text-lg mb-1"></i><span class="text-[9px] font-bold">Services</span>
+            </a>
+            <a href="#api-projects" class="flex flex-col items-center -mt-6">
+                <div class="w-14 h-14 bg-gradient-to-r from-brand-600 to-accent-600 rounded-full flex items-center justify-center text-white shadow-lg border-4 border-white">
+                    <i class="fa-solid fa-code text-xl"></i>
+                </div>
+                <span class="text-[10px] font-bold text-brand-600 mt-1">Live Projects</span>
+            </a>
+            <a href="#about" class="flex flex-col items-center p-2 text-slate-400 hover:text-brand-600">
+                <i class="fa-solid fa-building text-lg mb-1"></i><span class="text-[9px] font-bold">Company</span>
+            </a>
+            <a href="https://www.zigzex.com/contactus.html" target="_blank" class="flex flex-col items-center p-2 text-slate-400 hover:text-brand-600">
+                <i class="fa-solid fa-envelope text-lg mb-1"></i>
+                <span class="text-[9px] font-bold">Contact</span>
+            </a>
+        </div>
+    </nav>
+    
+    <section id="hero" class="relative min-h-[100vh] flex items-center justify-center pt-20 pb-20 overflow-hidden bg-[#070b14]">
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#1e293b80_1px,transparent_1px),linear-gradient(to_bottom,#1e293b80_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-60 animate-[pulse_5s_ease-in-out_infinite]"></div>
+
+        <div class="absolute top-1/4 left-1/4 w-[30rem] h-[30rem] bg-brand-600/20 rounded-full blur-[120px] animate-blob pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-[30rem] h-[30rem] bg-accent-600/10 rounded-full blur-[120px] animate-blob animation-delay-2000 pointer-events-none"></div>
+
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-4 flex flex-col items-center text-center">
+            
+            <div class="mb-8 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-brand-300 text-xs font-semibold tracking-widest uppercase shadow-[0_0_20px_rgba(59,130,246,0.15)] transform translate-y-8 opacity-0 animate-[slideUpFade_0.8s_ease-out_forwards]">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
+                </span>
+                <span style="color: white;">Next-Gen Enterprise Architecture</span>
+            </div>
+
+            <h1 class="flex flex-col items-center gap-4 md:gap-6 mb-8 w-full">
+                
+                <span class="block text-4xl sm:text-5xl md:text-7xl font-heading font-black tracking-tight text-white transform translate-y-8 opacity-0 animate-[slideUpFade_0.8s_ease-out_0.2s_forwards]">
+                    REIMAGINE YOUR
+                </span>
+                
+                <span class="flex flex-wrap justify-center items-center gap-3 transform translate-y-8 opacity-0 animate-[slideUpFade_0.8s_ease-out_0.4s_forwards]">
+                    <span class="inline-block px-8 py-2 md:py-4 rounded-[2.5rem] bg-gradient-to-r from-brand-600 to-indigo-600 text-white font-serif italic text-4xl sm:text-5xl md:text-7xl font-medium shadow-2xl shadow-brand-500/30 rotate-[-2deg] hover:rotate-0 transition-transform duration-500 cursor-default">
+                        Digital
+                    </span>
+                    <span class="inline-block text-5xl sm:text-6xl md:text-8xl font-sans font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-400">
+                        ECOSYSTEM
+                    </span>
+                </span>
+                
+                <span class="block transform translate-y-8 opacity-0 animate-[slideUpFade_0.8s_ease-out_0.6s_forwards] mt-4">
+                    <span class="inline-block px-10 py-3 bg-white/5 border border-white/10 backdrop-blur-xl rounded-2xl text-xl md:text-3xl font-light tracking-[0.3em] text-blue-100 uppercase font-sans shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
+                        At Global Scale
+                    </span>
+                </span>
+            </h1>
+
+            <p class="max-w-2xl text-slate-400 text-lg md:text-xl transform translate-y-8 opacity-0 animate-[slideUpFade_0.8s_ease-out_0.8s_forwards] font-medium leading-relaxed mb-12">
+                We engineer high-performance, secure, and scalable software solutions that turn complex bottlenecks into streamlined operational brilliance.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-5 transform translate-y-8 opacity-0 animate-[slideUpFade_0.8s_ease-out_1s_forwards]">
+                <button onclick="smoothScrollTo('api-projects')" class="group relative px-8 py-4 bg-white text-slate-900 rounded-xl font-bold text-sm uppercase tracking-wide overflow-hidden shadow-[0_0_40px_rgba(255,255,255,0.15)] hover:shadow-[0_0_60px_rgba(255,255,255,0.3)] transition-all duration-300">
+                    <span class="relative z-10 flex items-center gap-2">Explore Solutions <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i></span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-slate-100 to-slate-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+                <a href="https://www.zigzex.com/software/software.html" target="_blank">
+                    <button  class="px-8 py-4 bg-transparent border border-slate-700 text-white rounded-xl font-bold text-sm uppercase tracking-wide hover:bg-white/10 hover:border-slate-500 transition-all duration-300 backdrop-blur-sm flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-bolt text-brand-400"></i> Start a Project
+                </button>
+                </a>
+            </div>
+        </div>
+
+        <div class="hidden lg:flex absolute top-[25%] left-[12%] w-16 h-16 bg-white/5 border border-white/10 backdrop-blur-lg rounded-2xl items-center justify-center text-blue-400 text-3xl animate-[float_5s_ease-in-out_infinite] opacity-0 animate-[slideUpFade_1s_ease-out_1.2s_forwards] shadow-2xl">
+            <i class="fa-brands fa-react"></i>
+        </div>
+        <div class="hidden lg:flex absolute bottom-[30%] right-[10%] w-20 h-20 bg-white/5 border border-white/10 backdrop-blur-lg rounded-full items-center justify-center text-orange-400 text-4xl animate-[float_7s_ease-in-out_infinite_reverse] opacity-0 animate-[slideUpFade_1s_ease-out_1.4s_forwards] shadow-2xl">
+            <i class="fa-brands fa-aws"></i>
+        </div>
+        <div class="hidden lg:flex absolute top-[20%] right-[20%] w-14 h-14 bg-white/5 border border-white/10 backdrop-blur-lg rounded-xl items-center justify-center text-green-400 text-2xl animate-[float_6s_ease-in-out_infinite_1s] opacity-0 animate-[slideUpFade_1s_ease-out_1.6s_forwards] shadow-2xl">
+            <i class="fa-brands fa-node-js"></i>
+        </div>
+        <div class="hidden lg:flex absolute bottom-[20%] left-[20%] w-14 h-14 bg-white/5 border border-white/10 backdrop-blur-lg rounded-xl items-center justify-center text-blue-500 text-2xl animate-[float_4s_ease-in-out_infinite_0.5s] opacity-0 animate-[slideUpFade_1s_ease-out_1.8s_forwards] shadow-2xl">
+            <i class="fa-brands fa-docker"></i>
+        </div>
+    </section>
+
+    <div class="bg-white border-b border-slate-200 py-6 overflow-hidden relative">
+        <div class="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-white to-transparent z-10"></div>
+        <div class="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-white to-transparent z-10"></div>
+        <div class="flex animate-marquee whitespace-nowrap items-center gap-10 md:gap-24">
+            <span class="text-lg md:text-2xl font-bold text-slate-500 font-heading flex items-center gap-2"><i class="fa-brands fa-aws text-2xl md:text-3xl"></i> Amazon Web Services</span>
+            <span class="text-lg md:text-2xl font-bold text-slate-500 font-heading flex items-center gap-2"><i class="fa-brands fa-react text-2xl md:text-3xl"></i> React Enterprise</span>
+            <span class="text-lg md:text-2xl font-bold text-slate-500 font-heading flex items-center gap-2"><i class="fa-solid fa-leaf text-2xl md:text-3xl"></i> Spring Boot</span>
+            <span class="text-lg md:text-2xl font-bold text-slate-500 font-heading flex items-center gap-2"><i class="fa-brands fa-docker text-2xl md:text-3xl"></i> Docker / K8s</span>
+            <span class="text-lg md:text-2xl font-bold text-slate-500 font-heading flex items-center gap-2"><i class="fa-solid fa-database text-2xl md:text-3xl"></i> MySQL & Redis</span>
+            <span class="text-lg md:text-2xl font-bold text-slate-500 font-heading flex items-center gap-2"><i class="fa-brands fa-node-js text-2xl md:text-3xl"></i> Node.js</span>
+            <span class="text-lg md:text-2xl font-bold text-slate-500 font-heading flex items-center gap-2"><i class="fa-brands fa-python text-2xl md:text-3xl"></i> Python</span>
+            <span class="text-lg md:text-2xl font-bold text-slate-500 font-heading flex items-center gap-2"><i class="fa-brands fa-java text-2xl md:text-3xl"></i> Java Enterprise</span>
+            <span class="text-lg md:text-2xl font-bold text-slate-500 font-heading flex items-center gap-2"><i class="fa-brands fa-angular text-2xl md:text-3xl"></i> Angular</span>
+            <span class="text-lg md:text-2xl font-bold text-slate-500 font-heading flex items-center gap-2"><i class="fa-brands fa-vuejs text-2xl md:text-3xl"></i> Vue.js</span>
+        </div>
+    </div>
+
+    <section id="roi" class="py-16 md:py-24 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-[90rem] mx-auto px-4 md:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-10 md:mb-16 reveal">
+                <h2 class="font-heading text-2xl md:text-5xl font-bold text-slate-900 mb-4">Why Enterprise Leaders Choose Us</h2>
+                <p class="text-slate-600 text-xs md:text-lg hidden sm:block">We don't just deliver code; we deliver measurable business outcomes. ZIGZEX bridges the gap between technical capability and financial metrics.</p>
+            </div>
+            
+            <div class="grid grid-cols-3 gap-2 md:gap-8">
+                <div class="glass rounded-xl md:rounded-2xl p-3 md:p-8 hover:-translate-y-2 transition-transform reveal text-center md:text-left flex flex-col items-center md:items-start">
+                    <div class="w-8 h-8 md:w-12 md:h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center text-sm md:text-xl mb-3 md:mb-6"><i class="fa-solid fa-chart-pie"></i></div>
+                    <h3 class="font-heading text-[10px] md:text-xl font-bold text-slate-900 mb-1 md:mb-3">Predictable ROI</h3>
+                    <p class="text-slate-600 text-[9px] md:text-sm leading-snug md:leading-relaxed mb-2 md:mb-6 hidden sm:block">Our hybrid delivery model and strict agile sprints eliminate budget overruns, reducing TCO by an average of 38% compared to legacy firms.</p>
+                    <div class="text-[8px] md:text-sm font-bold text-blue-600 md:border-t border-slate-200 md:pt-4 w-full text-center md:text-left">Avg. Payback: <br class="sm:hidden"><span class="text-slate-900">8 Months</span></div>
+                </div>
+                <div class="glass rounded-xl md:rounded-2xl p-3 md:p-8 hover:-translate-y-2 transition-transform reveal delay-100 text-center md:text-left flex flex-col items-center md:items-start">
+                    <div class="w-8 h-8 md:w-12 md:h-12 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center text-sm md:text-xl mb-3 md:mb-6"><i class="fa-solid fa-microchip"></i></div>
+                    <h3 class="font-heading text-[10px] md:text-xl font-bold text-slate-900 mb-1 md:mb-3">Future-Proof Tech</h3>
+                    <p class="text-slate-600 text-[9px] md:text-sm leading-snug md:leading-relaxed mb-2 md:mb-6 hidden sm:block">We eliminate technical debt from day one. Utilizing microservices, containerization, and strict CI/CD pipelines ensures your infrastructure scales.</p>
+                    <div class="text-[8px] md:text-sm font-bold text-purple-600 md:border-t border-slate-200 md:pt-4 w-full text-center md:text-left">Architecture: <br class="sm:hidden"><span class="text-slate-900">Cloud-Native</span></div>
+                </div>
+                <div class="glass rounded-xl md:rounded-2xl p-3 md:p-8 hover:-translate-y-2 transition-transform reveal delay-200 text-center md:text-left flex flex-col items-center md:items-start">
+                    <div class="w-8 h-8 md:w-12 md:h-12 bg-emerald-100 text-emerald-600 rounded-lg flex items-center justify-center text-sm md:text-xl mb-3 md:mb-6"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3 class="font-heading text-[10px] md:text-xl font-bold text-slate-900 mb-1 md:mb-3">Ironclad Security</h3>
+                    <p class="text-slate-600 text-[9px] md:text-sm leading-snug md:leading-relaxed mb-2 md:mb-6 hidden sm:block">Security isn't an afterthought. We implement Zero-Trust models, automated penetration testing, and ensure compliance with strict industry standards.</p>
+                    <div class="text-[8px] md:text-sm font-bold text-emerald-600 md:border-t border-slate-200 md:pt-4 w-full text-center md:text-left">Breach Record: <br class="sm:hidden"><span class="text-slate-900">Zero Incidents</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-16 md:py-24 bg-white reveal">
+        <div class="max-w-[90rem] mx-auto px-4 md:px-8 grid md:grid-cols-12 gap-8 md:gap-12 items-center">
+            <div class="md:col-span-5">
+                <span class="px-3 py-1 md:px-4 md:py-2 bg-brand-50 text-brand-700 border border-brand-100 text-[9px] md:text-xs font-bold rounded-full">ESTABLISHED 2018 • VISAKHAPATNAM HQ</span>
+                <h2 class="font-heading text-3xl md:text-5xl mt-4 md:mt-6 font-extrabold text-slate-900 leading-tight">Corporate Philosophy & Vision.</h2>
+                <p class="mt-4 md:mt-6 text-sm md:text-lg text-slate-600 font-medium">
+                    A forward-thinking IT company that doesn't just code — we architect digital futures. Specializing in enterprise-grade software solutions, intelligent automation, and seamless cloud transformations.
+                </p>
+                <div class="mt-6 md:mt-8 flex items-center gap-x-6">
+                    <div class="flex items-center">
+                        <i class="fa-solid fa-certificate text-3xl md:text-4xl text-amber-500"></i>
+                        <div class="ml-3 md:ml-4">
+                            <p class="font-bold text-sm md:text-base text-slate-900">Certified Excellence</p>
+                            <p class="text-xs md:text-sm text-slate-500">ISO 9001:2015</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="md:col-span-7 glass rounded-2xl md:rounded-3xl p-5 md:p-10 border border-slate-200 shadow-lg">
+                <h3 class="text-lg md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-x-3 text-slate-900"><i class="fa-solid fa-lightbulb text-amber-500"></i> Core Tenets</h3>
+                <div class="grid grid-cols-3 gap-3 md:gap-8">
+                    <div class="text-center md:text-left">
+                        <div class="text-brand-600 text-[8px] md:text-xs font-bold tracking-widest mb-1 md:mb-2 uppercase">Intelligence</div>
+                        <p class="text-slate-600 text-[9px] md:text-sm font-medium hidden sm:block">Every solution begins with deep business understanding. We engineer intelligence that adapts and evolves.</p>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <div class="text-purple-600 text-[8px] md:text-xs font-bold tracking-widest mb-1 md:mb-2 uppercase">Scalability</div>
+                        <p class="text-slate-600 text-[9px] md:text-sm font-medium hidden sm:block">From MVP to global enterprise systems, our architectures are built to handle 10x growth without breaking.</p>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <div class="text-emerald-600 text-[8px] md:text-xs font-bold tracking-widest mb-1 md:mb-2 uppercase">Ethics</div>
+                        <p class="text-slate-600 text-[9px] md:text-sm font-medium hidden sm:block">Security, privacy, and sustainability are non-negotiable. We build solutions that respect data sovereignty.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="py-16 md:py-24 bg-slate-50 border-y border-slate-200 reveal">
+        <div class="max-w-[90rem] mx-auto px-4 md:px-8">
+            <div class="text-center mb-10 md:mb-16">
+                <span class="inline-flex items-center px-4 py-1.5 md:px-6 md:py-2 rounded-full bg-emerald-100 text-emerald-700 text-[9px] md:text-xs font-bold border border-emerald-200 uppercase tracking-widest">7+ Years of Proven Excellence</span>
+                <h2 class="font-heading text-3xl md:text-5xl font-extrabold text-slate-900 mt-4 md:mt-6">Building Reliable IT Solutions</h2>
+            </div>
+            
+            <div class="grid grid-cols-4 gap-2 md:gap-6">
+                <div class="glass bg-white py-4 md:p-8 rounded-xl md:rounded-2xl border border-slate-200 shadow-sm text-center">
+                    <i class="fa-solid fa-clock text-xl md:text-4xl text-brand-600 mb-2 md:mb-4"></i>
+                    <div class="text-lg md:text-5xl font-black text-slate-900 mb-1"><span class="counter" data-target="7">0</span>+</div>
+                    <p class="text-slate-500 font-bold text-[8px] md:text-sm uppercase tracking-widest">Years Active</p>
+                </div>
+                <div class="glass bg-white py-4 md:p-8 rounded-xl md:rounded-2xl border border-slate-200 shadow-sm text-center">
+                    <i class="fa-solid fa-laptop-code text-xl md:text-4xl text-purple-600 mb-2 md:mb-4"></i>
+                    <div class="text-lg md:text-5xl font-black text-slate-900 mb-1"><span class="counter" data-target="50">0</span>+</div>
+                    <p class="text-slate-500 font-bold text-[8px] md:text-sm uppercase tracking-widest">Projects</p>
+                </div>
+                <div class="glass bg-white py-4 md:p-8 rounded-xl md:rounded-2xl border border-slate-200 shadow-sm text-center">
+                    <i class="fa-solid fa-globe text-xl md:text-4xl text-emerald-600 mb-2 md:mb-4"></i>
+                    <div class="text-lg md:text-5xl font-black text-slate-900 mb-1"><span class="counter" data-target="30">0</span>+</div>
+                    <p class="text-slate-500 font-bold text-[8px] md:text-sm uppercase tracking-widest">Clients</p>
+                </div>
+                <div class="glass bg-white py-4 md:p-8 rounded-xl md:rounded-2xl border border-slate-200 shadow-sm text-center">
+                    <i class="fa-solid fa-shield-check text-xl md:text-4xl text-amber-500 mb-2 md:mb-4"></i>
+                    <div class="text-lg md:text-5xl font-black text-slate-900 mb-1"><span class="counter" data-target="99">0</span>%</div>
+                    <p class="text-slate-500 font-bold text-[8px] md:text-sm uppercase tracking-widest">Success</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-16 md:py-24 bg-white reveal">
+        <div class="max-w-[90rem] mx-auto px-4 md:px-8">
+            <div class="text-center mb-10 md:mb-16">
+                <h2 class="font-heading text-3xl md:text-5xl font-extrabold text-slate-900">Comprehensive IT Services</h2>
+                <p class="mt-2 md:mt-4 text-slate-500 font-medium max-w-xl mx-auto text-xs md:text-lg">From strategy to deployment — engineered for enterprise impact</p>
+            </div>
+            
+            <div class="grid grid-cols-4 gap-2 md:gap-6">
+                <div class="bg-slate-50 border border-slate-200 rounded-xl md:rounded-2xl p-3 md:p-8 hover:-translate-y-2 transition-transform text-center md:text-left flex flex-col items-center md:items-start">
+                    <div class="w-8 h-8 md:w-12 md:h-12 bg-sky-100 text-sky-600 rounded-lg flex items-center justify-center text-sm md:text-2xl mb-2 md:mb-6"><i class="fa-solid fa-cloud"></i></div>
+                    <h4 class="text-[9px] md:text-lg font-bold text-slate-900 mb-1 md:mb-3">Cloud Migration</h4>
+                    <p class="text-slate-600 text-sm hidden md:block">AWS, Azure, GCP multi-cloud strategies with zero-downtime SLA.</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-xl md:rounded-2xl p-3 md:p-8 hover:-translate-y-2 transition-transform text-center md:text-left flex flex-col items-center md:items-start">
+                    <div class="w-8 h-8 md:w-12 md:h-12 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center text-sm md:text-2xl mb-2 md:mb-6"><i class="fa-solid fa-brain"></i></div>
+                    <h4 class="text-[9px] md:text-lg font-bold text-slate-900 mb-1 md:mb-3">AI & ML Solutions</h4>
+                    <p class="text-slate-600 text-sm hidden md:block">Custom LLMs, predictive analytics, and intelligent automation platforms.</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-xl md:rounded-2xl p-3 md:p-8 hover:-translate-y-2 transition-transform text-center md:text-left flex flex-col items-center md:items-start">
+                    <div class="w-8 h-8 md:w-12 md:h-12 bg-emerald-100 text-emerald-600 rounded-lg flex items-center justify-center text-sm md:text-2xl mb-2 md:mb-6"><i class="fa-solid fa-laptop-code"></i></div>
+                    <h4 class="text-[9px] md:text-lg font-bold text-slate-900 mb-1 md:mb-3">Full-Stack Dev</h4>
+                    <p class="text-slate-600 text-sm hidden md:block">React, Spring Boot, Node.js, Microservices, and Event-driven systems.</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-xl md:rounded-2xl p-3 md:p-8 hover:-translate-y-2 transition-transform text-center md:text-left flex flex-col items-center md:items-start">
+                    <div class="w-8 h-8 md:w-12 md:h-12 bg-rose-100 text-rose-600 rounded-lg flex items-center justify-center text-sm md:text-2xl mb-2 md:mb-6"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h4 class="text-[9px] md:text-lg font-bold text-slate-900 mb-1 md:mb-3">Cybersecurity</h4>
+                    <p class="text-slate-600 text-sm hidden md:block">VAPT testing, zero-trust frameworks, SOC 2, and GDPR compliance.</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-xl md:rounded-2xl p-3 md:p-8 hover:-translate-y-2 transition-transform text-center md:text-left flex flex-col items-center md:items-start">
+                    <div class="w-8 h-8 md:w-12 md:h-12 bg-amber-100 text-amber-600 rounded-lg flex items-center justify-center text-sm md:text-2xl mb-2 md:mb-6"><i class="fa-solid fa-mobile-screen"></i></div>
+                    <h4 class="text-[9px] md:text-lg font-bold text-slate-900 mb-1 md:mb-3">Mobile Platforms</h4>
+                    <p class="text-slate-600 text-sm hidden md:block">Flutter and React Native cross-platform enterprise applications.</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-xl md:rounded-2xl p-3 md:p-8 hover:-translate-y-2 transition-transform text-center md:text-left flex flex-col items-center md:items-start">
+                    <div class="w-8 h-8 md:w-12 md:h-12 bg-teal-100 text-teal-600 rounded-lg flex items-center justify-center text-sm md:text-2xl mb-2 md:mb-6"><i class="fa-solid fa-diagram-project"></i></div>
+                    <h4 class="text-[9px] md:text-lg font-bold text-slate-900 mb-1 md:mb-3">ERP Systems</h4>
+                    <p class="text-slate-600 text-sm hidden md:block">Custom backend resource management and automated workflows.</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-xl md:rounded-2xl p-3 md:p-8 hover:-translate-y-2 transition-transform text-center md:text-left flex flex-col items-center md:items-start">
+                    <div class="w-8 h-8 md:w-12 md:h-12 bg-cyan-100 text-cyan-600 rounded-lg flex items-center justify-center text-sm md:text-2xl mb-2 md:mb-6"><i class="fa-solid fa-chart-simple"></i></div>
+                    <h4 class="text-[9px] md:text-lg font-bold text-slate-900 mb-1 md:mb-3">Data Analytics</h4>
+                    <p class="text-slate-600 text-sm hidden md:block">Power BI, Tableau, and custom real-time metrics dashboards.</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-xl md:rounded-2xl p-3 md:p-8 hover:-translate-y-2 transition-transform text-center md:text-left flex flex-col items-center md:items-start">
+                    <div class="w-8 h-8 md:w-12 md:h-12 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center text-sm md:text-2xl mb-2 md:mb-6"><i class="fa-solid fa-link"></i></div>
+                    <h4 class="text-[9px] md:text-lg font-bold text-slate-900 mb-1 md:mb-3">API Integration</h4>
+                    <p class="text-slate-600 text-sm hidden md:block">Secure middleware connecting legacy mainframes to modern interfaces.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="api-projects" class="py-16 md:py-24 bg-slate-100 border-y border-slate-200 relative reveal">
+        <div class="max-w-[90rem] mx-auto px-4 md:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 md:mb-10 gap-4">
+                <div>
+                    <span class="inline-flex items-center gap-2 px-3 py-1 bg-brand-100 text-brand-700 text-[10px] font-bold rounded-full uppercase tracking-widest mb-3 border border-brand-200">
+                        <i class="fa-solid fa-database"></i> LIVE API DATA
+                    </span>
+                    <h2 class="font-heading text-3xl md:text-5xl font-extrabold text-slate-900 mb-2 md:mb-3">Client Success Portfolio</h2>
+                    <p class="text-slate-500 font-medium text-xs md:text-base">Dynamic portfolio injected via Spring Boot REST backend.</p>
+                </div>
+            </div>
+            <div class="bg-white border border-slate-200 p-3 md:p-5 rounded-2xl mb-6 md:mb-10 flex flex-col lg:flex-row gap-3 md:gap-4 justify-between items-center z-20 relative shadow-sm">
+                <div class="relative w-full lg:w-2/5">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" id="searchInput" placeholder="Search tech stack, title, or keywords..." class="w-full bg-slate-50 border border-slate-200 rounded-lg py-2.5 pl-11 pr-4 text-xs md:text-sm text-slate-900 font-medium focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all">
+                </div>
+                
+                <div class="flex flex-col sm:flex-row w-full lg:w-auto gap-2 md:gap-4">
+                    <div class="hidden md:flex items-center bg-slate-50 border border-slate-200 rounded-lg p-1">
+                        <button onclick="setQuickStatus('All')" class="status-btn active px-4 py-2 text-xs font-bold rounded-md bg-white text-brand-700 shadow-sm border border-slate-200 transition-colors">All</button>
+                        <button onclick="setQuickStatus('Live')" class="status-btn px-4 py-2 text-xs font-bold rounded-md text-slate-500 hover:text-slate-900 transition-colors">Live</button>
+                        <button onclick="setQuickStatus('In Development')" class="status-btn px-4 py-2 text-xs font-bold rounded-md text-slate-500 hover:text-slate-900 transition-colors">In Dev</button>
+                    </div>
+                    <div class="flex gap-2 md:gap-3 w-full sm:w-auto">
+                        <div class="relative w-1/2 sm:w-44">
+                            <select id="industryFilter" class="w-full bg-slate-50 border border-slate-200 rounded-lg py-2.5 pl-3 pr-8 text-[10px] md:text-sm text-slate-700 font-bold appearance-none focus:outline-none focus:border-brand-500 cursor-pointer">
+                                <option value="All">All Industries</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[10px]"></i>
+                        </div>
+                        <div class="relative w-1/2 sm:w-44">
+                            <select id="sortFilter" class="w-full bg-slate-50 border border-slate-200 rounded-lg py-2.5 pl-3 pr-8 text-[10px] md:text-sm text-slate-700 font-bold appearance-none focus:outline-none focus:border-brand-500 cursor-pointer">
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Oldest First</option>
+                                <option value="az">Title A-Z</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[10px]"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="api-status" class="text-center py-4 md:py-6 text-brand-600 font-bold text-xs md:text-sm bg-brand-50 border border-brand-100 rounded-xl mb-6 md:mb-8 animate-pulse">
+                <i class="fa-solid fa-server mr-2"></i> Connecting to Java Spring Boot Database...
+            </div>
+            <div id="api-projects-grid" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-6">
+            </div>
+        </div>
+    </section>
+
+    <section id="tech-stack" class="py-16 md:py-24 bg-gradient-to-br from-slate-900 via-brand-950 to-slate-900 text-white reveal overflow-hidden relative">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-brand-500 to-purple-600" style="clip-path: polygon(0 0, 100% 0, 100% 50%, 0 100%);"></div>
+        </div>
+        
+        <div class="max-w-[90rem] mx-auto px-4 md:px-8 relative z-10">
+            <div class="text-center mb-10 md:mb-16">
+                <span class="inline-flex items-center px-4 py-1.5 md:px-6 md:py-2 rounded-full bg-brand-600/20 backdrop-blur-sm text-brand-300 text-[9px] md:text-xs font-bold border border-brand-500/30 uppercase tracking-widest">ENTERPRISE GRADE STACK</span>
+                <h2 class="font-heading text-3xl md:text-5xl font-extrabold mt-4 md:mt-6 mb-3 md:mb-6">The ZIGZEX Arsenal</h2>
+                <p class="text-blue-200 text-xs md:text-lg max-w-3xl mx-auto hidden sm:block">We leverage battle-tested enterprise frameworks and cutting-edge cloud infrastructure to deliver systems that scale from startup to Fortune 500.</p>
+            </div>
+            
+            <div class="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-8">
+                <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-8 hover:bg-white/10 transition-all text-center flex flex-col items-center">
+                    <div class="w-10 h-10 md:w-14 md:h-14 bg-blue-500/20 rounded-xl flex items-center justify-center text-lg md:text-3xl mb-2 md:mb-6">
+                        <i class="fa-brands fa-react text-blue-400"></i>
+                    </div>
+                    <h3 class="text-[10px] md:text-xl font-bold mb-2">Frontend</h3>
+                    <ul class="space-y-1 md:space-y-3 text-blue-100 text-left hidden lg:block">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i> React.js 18+</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i> Next.js for SSR</li>
+                    </ul>
+                </div>
+                <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-8 hover:bg-white/10 transition-all text-center flex flex-col items-center">
+                    <div class="w-10 h-10 md:w-14 md:h-14 bg-green-500/20 rounded-xl flex items-center justify-center text-lg md:text-3xl mb-2 md:mb-6">
+                        <i class="fa-solid fa-leaf text-green-400"></i>
+                    </div>
+                    <h3 class="text-[10px] md:text-xl font-bold mb-2">Backend</h3>
+                    <ul class="space-y-1 md:space-y-3 text-blue-100 text-left hidden lg:block">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i> Spring Boot 3.x</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i> Node.js APIs</li>
+                    </ul>
+                </div>
+                <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-8 hover:bg-white/10 transition-all text-center flex flex-col items-center">
+                    <div class="w-10 h-10 md:w-14 md:h-14 bg-orange-500/20 rounded-xl flex items-center justify-center text-lg md:text-3xl mb-2 md:mb-6">
+                        <i class="fa-brands fa-aws text-orange-400"></i>
+                    </div>
+                    <h3 class="text-[10px] md:text-xl font-bold mb-2">DevOps</h3>
+                    <ul class="space-y-1 md:space-y-3 text-blue-100 text-left hidden lg:block">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i> AWS Cloud</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i> Docker & K8s</li>
+                    </ul>
+                </div>
+                <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-8 hover:bg-white/10 transition-all text-center flex flex-col items-center">
+                    <div class="w-10 h-10 md:w-14 md:h-14 bg-purple-500/20 rounded-xl flex items-center justify-center text-lg md:text-3xl mb-2 md:mb-6">
+                        <i class="fa-solid fa-database text-purple-400"></i>
+                    </div>
+                    <h3 class="text-[10px] md:text-xl font-bold mb-2">Database</h3>
+                    <ul class="space-y-1 md:space-y-3 text-blue-100 text-left hidden lg:block">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i> MySQL / PG</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i> MongoDB</li>
+                    </ul>
+                </div>
+                <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-8 hover:bg-white/10 transition-all text-center flex flex-col items-center">
+                    <div class="w-10 h-10 md:w-14 md:h-14 bg-cyan-500/20 rounded-xl flex items-center justify-center text-lg md:text-3xl mb-2 md:mb-6">
+                        <i class="fa-solid fa-mobile-screen text-cyan-400"></i>
+                    </div>
+                    <h3 class="text-[10px] md:text-xl font-bold mb-2">Mobile</h3>
+                    <ul class="space-y-1 md:space-y-3 text-blue-100 text-left hidden lg:block">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i> Flutter</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i> React Native</li>
+                    </ul>
+                </div>
+                <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-8 hover:bg-white/10 transition-all text-center flex flex-col items-center">
+                    <div class="w-10 h-10 md:w-14 md:h-14 bg-pink-500/20 rounded-xl flex items-center justify-center text-lg md:text-3xl mb-2 md:mb-6">
+                        <i class="fa-solid fa-brain text-pink-400"></i>
+                    </div>
+                    <h3 class="text-[10px] md:text-xl font-bold mb-2">AI / ML</h3>
+                    <ul class="space-y-1 md:space-y-3 text-blue-100 text-left hidden lg:block">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i> TensorFlow</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i> OpenAI GPT</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="industry-solutions" class="py-16 md:py-24 bg-white reveal">
+        <div class="max-w-[90rem] mx-auto px-4 md:px-8">
+            <div class="text-center mb-10 md:mb-16">
+                <span class="inline-flex items-center px-4 py-1.5 md:px-6 md:py-2 rounded-full bg-purple-100 text-purple-700 text-[9px] md:text-xs font-bold border border-purple-200 uppercase tracking-widest">DOMAIN EXPERTISE</span>
+                <h2 class="font-heading text-3xl md:text-5xl font-extrabold text-slate-900 mt-4 md:mt-6 mb-3 md:mb-6">Industry Solutions</h2>
+            </div>
+            
+            <div class="grid grid-cols-4 lg:grid-cols-4 gap-2 md:gap-8">
+                <div class="bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200 rounded-xl md:rounded-3xl p-3 md:p-8 hover:shadow-xl transition-all flex flex-col items-center md:items-start text-center md:text-left">
+                    <div class="w-10 h-10 md:w-16 md:h-16 bg-blue-100 rounded-lg md:rounded-2xl flex items-center justify-center text-lg md:text-3xl mb-2 md:mb-6">
+                        <i class="fa-solid fa-heart-pulse text-blue-600"></i>
+                    </div>
+                    <h3 class="text-[9px] md:text-2xl font-bold text-slate-900 mb-1 md:mb-3">Healthcare</h3>
+                    <p class="text-slate-600 text-sm mb-4 hidden md:block">HIPAA-compliant patient management systems, telemedicine platforms, and AI diagnostic tools.</p>
+                </div>
+                <div class="bg-gradient-to-br from-purple-50 to-pink-50 border border-purple-200 rounded-xl md:rounded-3xl p-3 md:p-8 hover:shadow-xl transition-all flex flex-col items-center md:items-start text-center md:text-left">
+                    <div class="w-10 h-10 md:w-16 md:h-16 bg-purple-100 rounded-lg md:rounded-2xl flex items-center justify-center text-lg md:text-3xl mb-2 md:mb-6">
+                        <i class="fa-solid fa-cart-shopping text-purple-600"></i>
+                    </div>
+                    <h3 class="text-[9px] md:text-2xl font-bold text-slate-900 mb-1 md:mb-3">E-Commerce</h3>
+                    <p class="text-slate-600 text-sm mb-4 hidden md:block">Scalable marketplaces, inventory management, payment gateways, and recommendation engines.</p>
+                </div>
+                <div class="bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200 rounded-xl md:rounded-3xl p-3 md:p-8 hover:shadow-xl transition-all flex flex-col items-center md:items-start text-center md:text-left">
+                    <div class="w-10 h-10 md:w-16 md:h-16 bg-emerald-100 rounded-lg md:rounded-2xl flex items-center justify-center text-lg md:text-3xl mb-2 md:mb-6">
+                        <i class="fa-solid fa-building-columns text-emerald-600"></i>
+                    </div>
+                    <h3 class="text-[9px] md:text-2xl font-bold text-slate-900 mb-1 md:mb-3">FinTech</h3>
+                    <p class="text-slate-600 text-sm mb-4 hidden md:block">Secure payment processing, fraud detection, blockchain integration, and compliance solutions.</p>
+                </div>
+                <div class="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-xl md:rounded-3xl p-3 md:p-8 hover:shadow-xl transition-all flex flex-col items-center md:items-start text-center md:text-left">
+                    <div class="w-10 h-10 md:w-16 md:h-16 bg-amber-100 rounded-lg md:rounded-2xl flex items-center justify-center text-lg md:text-3xl mb-2 md:mb-6">
+                        <i class="fa-solid fa-graduation-cap text-amber-600"></i>
+                    </div>
+                    <h3 class="text-[9px] md:text-2xl font-bold text-slate-900 mb-1 md:mb-3">Education</h3>
+                    <p class="text-slate-600 text-sm mb-4 hidden md:block">LMS platforms, virtual classrooms, student portals, and AI-powered learning systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="process" class="py-16 md:py-24 bg-slate-50 border-y border-slate-200 reveal">
+        <div class="max-w-[90rem] mx-auto px-4 md:px-8">
+            <h2 class="font-heading text-3xl md:text-5xl text-center font-extrabold text-slate-900 mb-10 md:mb-16">6-Week Delivery</h2>
+            
+            <div class="grid grid-cols-3 lg:grid-cols-6 gap-2 md:gap-4">
+                <div class="text-center bg-white p-3 md:p-6 border border-slate-200 rounded-xl md:rounded-2xl">
+                    <div class="mx-auto w-8 h-8 md:w-12 md:h-12 bg-brand-100 text-brand-600 font-black rounded-full flex items-center justify-center text-sm md:text-xl mb-2 md:mb-4">1</div>
+                    <h5 class="font-bold text-slate-900 text-[10px] md:text-sm mb-1 md:mb-2">Discovery</h5>
+                    <p class="text-[8px] md:text-[10px] text-slate-500 font-medium hidden sm:block">Deep-dive workshops for KPIs</p>
+                </div>
+                <div class="text-center bg-white p-3 md:p-6 border border-slate-200 rounded-xl md:rounded-2xl">
+                    <div class="mx-auto w-8 h-8 md:w-12 md:h-12 bg-brand-100 text-brand-600 font-black rounded-full flex items-center justify-center text-sm md:text-xl mb-2 md:mb-4">2</div>
+                    <h5 class="font-bold text-slate-900 text-[10px] md:text-sm mb-1 md:mb-2">Architecture</h5>
+                    <p class="text-[8px] md:text-[10px] text-slate-500 font-medium hidden sm:block">Scalable blueprints & diagrams</p>
+                </div>
+                <div class="text-center bg-white p-3 md:p-6 border border-slate-200 rounded-xl md:rounded-2xl">
+                    <div class="mx-auto w-8 h-8 md:w-12 md:h-12 bg-brand-100 text-brand-600 font-black rounded-full flex items-center justify-center text-sm md:text-xl mb-2 md:mb-4">3</div>
+                    <h5 class="font-bold text-slate-900 text-[10px] md:text-sm mb-1 md:mb-2">Agile Dev</h5>
+                    <p class="text-[8px] md:text-[10px] text-slate-500 font-medium hidden sm:block">2-week sprints, daily standups</p>
+                </div>
+                <div class="text-center bg-white p-3 md:p-6 border border-slate-200 rounded-xl md:rounded-2xl">
+                    <div class="mx-auto w-8 h-8 md:w-12 md:h-12 bg-brand-100 text-brand-600 font-black rounded-full flex items-center justify-center text-sm md:text-xl mb-2 md:mb-4">4</div>
+                    <h5 class="font-bold text-slate-900 text-[10px] md:text-sm mb-1 md:mb-2">QA & Test</h5>
+                    <p class="text-[8px] md:text-[10px] text-slate-500 font-medium hidden sm:block">Automated penetration testing</p>
+                </div>
+                <div class="text-center bg-white p-3 md:p-6 border border-slate-200 rounded-xl md:rounded-2xl">
+                    <div class="mx-auto w-8 h-8 md:w-12 md:h-12 bg-brand-100 text-brand-600 font-black rounded-full flex items-center justify-center text-sm md:text-xl mb-2 md:mb-4">5</div>
+                    <h5 class="font-bold text-slate-900 text-[10px] md:text-sm mb-1 md:mb-2">Deployment</h5>
+                    <p class="text-[8px] md:text-[10px] text-slate-500 font-medium hidden sm:block">CI/CD pipeline execution</p>
+                </div>
+                <div class="text-center bg-white p-3 md:p-6 border border-slate-200 rounded-xl md:rounded-2xl">
+                    <div class="mx-auto w-8 h-8 md:w-12 md:h-12 bg-brand-100 text-brand-600 font-black rounded-full flex items-center justify-center text-sm md:text-xl mb-2 md:mb-4">6</div>
+                    <h5 class="font-bold text-slate-900 text-[10px] md:text-sm mb-1 md:mb-2">Support</h5>
+                    <p class="text-[8px] md:text-[10px] text-slate-500 font-medium hidden sm:block">24/7 monitoring & upgrades</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="whyus" class="py-16 md:py-24 bg-white reveal">
+        <div class="max-w-[90rem] mx-auto px-4 md:px-8">
+            <h2 class="font-heading text-3xl md:text-5xl text-center font-extrabold text-slate-900 mb-10 md:mb-16">Why ZIGZEX?</h2>
+            
+            <div class="grid grid-cols-3 gap-2 md:gap-8">
+                <div class="glass bg-slate-50 rounded-xl md:rounded-3xl p-3 md:p-8 text-center border border-slate-200 shadow-sm flex flex-col items-center">
+                    <i class="fa-solid fa-indian-rupee-sign text-2xl md:text-5xl text-emerald-500 mb-2 md:mb-6"></i>
+                    <h4 class="text-[10px] md:text-xl font-bold text-slate-900 mb-1 md:mb-3">Cost-Efficient</h4>
+                    <p class="text-slate-600 text-[9px] md:text-sm hidden sm:block">Vizag-based delivery with global standards — 40% lower TCO.</p>
+                </div>
+                <div class="glass bg-slate-50 rounded-xl md:rounded-3xl p-3 md:p-8 text-center border border-slate-200 shadow-sm flex flex-col items-center">
+                    <i class="fa-solid fa-users-rectangle text-2xl md:text-5xl text-brand-500 mb-2 md:mb-6"></i>
+                    <h4 class="text-[10px] md:text-xl font-bold text-slate-900 mb-1 md:mb-3">Senior Teams</h4>
+                    <p class="text-slate-600 text-[9px] md:text-sm hidden sm:block">80% of delivery leads are ex-enterprise architects.</p>
+                </div>
+                <div class="glass bg-slate-50 rounded-xl md:rounded-3xl p-3 md:p-8 text-center border border-slate-200 shadow-sm flex flex-col items-center">
+                    <i class="fa-solid fa-clock-rotate-left text-2xl md:text-5xl text-purple-500 mb-2 md:mb-6"></i>
+                    <h4 class="text-[10px] md:text-xl font-bold text-slate-900 mb-1 md:mb-3">Fast Value</h4>
+                    <p class="text-slate-600 text-[9px] md:text-sm hidden sm:block">MVP deployed in 4 weeks. Full production in 10–12 weeks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="py-16 md:py-24 bg-slate-900 text-white overflow-hidden reveal rounded-t-[2rem] md:rounded-t-[3rem]">
+        <div class="max-w-[90rem] mx-auto px-4 md:px-8">
+            <h2 class="font-heading text-3xl md:text-5xl text-center font-extrabold mb-4 md:mb-6">Client Voices</h2>
+            <div class="testimonial-container flex gap-4 md:gap-6 pb-4 px-2 md:px-4 mt-8 md:mt-12">
+                
+                <div class="testimonial-card bg-slate-800 border border-slate-700 w-[85vw] md:w-auto md:min-w-[420px] p-6 md:p-8 rounded-2xl md:rounded-3xl">
+                    <div class="flex gap-1 text-amber-400 mb-4 text-xs md:text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-sm md:text-base italic text-slate-300 font-medium mb-6">"The most professional IT team we've partnered with. 
+                        Their React/Spring Boot architecture scaled effortlessly with our 400% growth."</p>
+                    <div class="flex items-center gap-x-4">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-purple-900 rounded-full text-purple-300 flex items-center justify-center font-bold text-xs md:text-sm">MS</div>
+                        <div>
+                            <p class="font-bold text-white text-xs md:text-sm">Meera Sharma</p>
+                            <p class="text-[9px] md:text-[11px] text-slate-400 font-bold uppercase tracking-wider">CTO, HealthVista</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card bg-slate-800 border border-slate-700 min-w-[280px] md:min-w-[420px] p-6 md:p-8 rounded-2xl md:rounded-3xl">
+                    <div class="flex gap-1 text-amber-400 mb-4 text-xs md:text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-sm md:text-base italic text-slate-300 font-medium mb-6">"ZIGZEX delivered beyond expectations. Their technical expertise turned our manual chaos into a streamlined digital powerhouse in 8 weeks."</p>
+                    <div class="flex items-center gap-x-4">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-brand-900 rounded-full text-brand-300 flex items-center justify-center font-bold text-xs md:text-sm">VR</div>
+                        <div>
+                            <p class="font-bold text-white text-xs md:text-sm">Vikram Rao</p>
+                            <p class="text-[9px] md:text-[11px] text-slate-400 font-bold uppercase tracking-wider">CEO, Bharat Logistics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="insights" class="py-16 md:py-24 bg-white border-b border-slate-200 reveal">
+        <div class="max-w-[90rem] mx-auto px-4 md:px-8">
+            <div class="flex justify-between items-end mb-10 md:mb-12">
+                <h2 class="font-heading text-3xl md:text-5xl font-extrabold text-slate-900">Insights</h2>
+            </div>
+            
+            <div class="grid grid-cols-3 gap-3 md:gap-8">
+                <div class="glass bg-white border border-slate-200 rounded-xl md:rounded-2xl p-3 md:p-8 hover:-translate-y-2 transition-transform shadow-sm">
+                    <div class="text-[8px] md:text-[10px] font-bold tracking-widest text-brand-600 mb-2 md:mb-3 uppercase">APR 2026</div>
+                    <h4 class="text-[10px] md:text-lg font-bold text-slate-900 mb-2 md:mb-4 leading-snug">GenAI in Architecture</h4>
+                    <p class="text-slate-600 text-[9px] md:text-sm font-medium line-clamp-2 md:line-clamp-3 hidden sm:block">A deep dive into practical implementations that delivered 10x productivity gains for our clients...</p>
+                </div>
+                <div class="glass bg-white border border-slate-200 rounded-xl md:rounded-2xl p-3 md:p-8 hover:-translate-y-2 transition-transform shadow-sm">
+                    <div class="text-[8px] md:text-[10px] font-bold tracking-widest text-purple-600 mb-2 md:mb-3 uppercase">MAR 2026</div>
+                    <h4 class="text-[10px] md:text-lg font-bold text-slate-900 mb-2 md:mb-4 leading-snug">Zero-trust Multi-cloud</h4>
+                    <p class="text-slate-600 text-[9px] md:text-sm font-medium line-clamp-2 md:line-clamp-3 hidden sm:block">Lessons from 7 years protecting sensitive data for banking and healthcare providers globally.</p>
+                </div>
+                <div class="glass bg-white border border-slate-200 rounded-xl md:rounded-2xl p-3 md:p-8 hover:-translate-y-2 transition-transform shadow-sm">
+                    <div class="text-[8px] md:text-[10px] font-bold tracking-widest text-emerald-600 mb-2 md:mb-3 uppercase">FEB 2026</div>
+                    <h4 class="text-[10px] md:text-lg font-bold text-slate-900 mb-2 md:mb-4 leading-snug">Limits of Low-code</h4>
+                    <p class="text-slate-600 text-[9px] md:text-sm font-medium line-clamp-2 md:line-clamp-3 hidden sm:block">Why we still strongly recommend custom Java/React development for core operational systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-16 md:py-24 bg-slate-50 reveal">
+        <div class="max-w-4xl mx-auto px-4 md:px-8">
+            <div class="bg-brand-950 rounded-3xl p-8 md:p-16 text-center shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-brand-600 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-accent-600 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+                
+                <h2 class="font-heading text-3xl md:text-6xl font-extrabold mb-6 text-white relative z-10">Let's Build the Future.</h2>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10 mt-8">
+                    <button onclick="showContactModal()" class="px-8 py-4 bg-white text-brand-950 text-xs md:text-sm font-bold rounded-lg shadow-lg hover:bg-brand-50 transition-colors">
+                        SCHEDULE CONSULTATION
+                    </button>
+                    <a href="mailto:info@zigzex.com" class="px-8 py-4 bg-transparent border border-brand-400 text-white text-xs md:text-sm font-bold rounded-lg hover:bg-brand-900 transition-colors">
+                        EMAIL US
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white border-t border-slate-200 pt-16 pb-24 md:pb-8">
+        <div class="max-w-[90rem] mx-auto px-4 md:px-8">
+            
+            <div class="grid grid-cols-2 md:grid-cols-12 gap-y-10 gap-x-6 mb-12">
+                <div class="col-span-2 md:col-span-4 pr-0 md:pr-10">
+                    <div class="flex items-center gap-x-2 mb-4">
+                        <span class="font-heading text-2xl md:text-3xl font-extrabold text-brand-600 tracking-tight">ZIGZEX</span>
+                    </div>
+                    <p class="text-slate-500 text-xs md:text-sm font-medium mb-6 leading-relaxed">Engineered systems for the modern digital enterprise. Building the future of scalable infrastructure.</p>
+                    <a href="mailto:info@zigzex.com" class="inline-flex items-center gap-2 text-sm font-bold text-slate-800 hover:text-brand-600 transition-colors mb-6">
+                        <i class="fa-solid fa-envelope text-brand-600"></i> info@zigzex.com
+                    </a>
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 rounded border border-slate-200 flex items-center justify-center text-slate-500 hover:text-brand-600 hover:border-brand-200 cursor-pointer transition-all"><a href="https://www.linkedin.com/company/zigzex" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin-in text-sm"></i></a></div>
+                        <div class="w-8 h-8 rounded border border-slate-200 flex items-center justify-center text-slate-500 hover:text-brand-600 hover:border-brand-200 cursor-pointer transition-all"><a href="https://x.com/zigzex2" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-twitter text-sm"></i></a></div>
+                        <div class="w-8 h-8 rounded border border-slate-200 flex items-center justify-center text-slate-500 hover:text-brand-600 hover:border-brand-200 cursor-pointer transition-all"><a href="https://www.instagram.com/zigzex.official?igsh=NWJkd2tleTY1bGkw" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram text-sm"></i></a></div>
+                    </div>
+                </div>
+
+                <div class="col-span-1 md:col-span-3">
+                    <p class="text-xs font-black text-slate-900 uppercase tracking-widest mb-6">Divisions</p>
+                    <ul class="space-y-4 text-xs md:text-sm text-slate-500 font-medium">
+                        <li><a href="https://www.zigzex.com/software/software.html" target="_blank" class="hover:text-brand-600 transition-colors">Software Engineering</a></li>
+                        <li><a href="https://www.zigzex.com/aerospace/aerospace.html" target="_blank" class="hover:text-brand-600 transition-colors">Aerospace Research</a></li>
+                        <li><a href="https://www.zigzex.com/software/subSoftware/subEnterprise/zigzexAcademy.html" target="_blank" class="hover:text-brand-600 transition-colors">Zigzex Academy OS</a></li>
+                        <li><a href="https://www.zigzex.com/ecommerce/ecommerce.html" target="_blank" class="hover:text-brand-600 transition-colors">Digital Commerce</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-span-1 md:col-span-3">
+                    <p class="text-xs font-black text-slate-900 uppercase tracking-widest mb-6">Company</p>
+                    <ul class="space-y-4 text-xs md:text-sm text-slate-500 font-medium">
+                        <li><a href="https://www.zigzex.com/index.html" target="_blank" class="hover:text-brand-600 transition-colors">About Us</a></li>
+                        <li><a href="https://www.zigzex.com/contactus.html" target="_blank" class="hover:text-brand-600 transition-colors">Contact Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-span-2 md:col-span-2">
+                    <p class="text-xs font-black text-slate-900 uppercase tracking-widest mb-6">Legal</p>
+                    <ul class="space-y-4 text-xs md:text-sm text-slate-500 font-medium">
+                        <li><a href="https://www.zigzex.com/privacy.html" target="_blank" class="hover:text-brand-600 transition-colors">Privacy Policy</a></li>
+                        <li><a href="https://www.zigzex.com/terms.html" target="_blank" class="hover:text-brand-600 transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4 py-8 border-y border-slate-100">
+                
+                <div class="flex items-center gap-4 px-6 py-4 bg-white border border-slate-200 rounded-xl w-full md:w-auto shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-10 h-10 bg-brand-50 rounded flex items-center justify-center text-brand-600 text-xl shrink-0"><i class="fa-solid fa-certificate"></i></div>
+                    <div>
+                        <div class="font-black text-slate-900 text-xs tracking-wide">ISO 9001:2015</div>
+                        <div class="text-[10px] text-slate-500 font-medium mt-0.5">Quality Management System</div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-4 px-6 py-4 bg-white border border-slate-200 rounded-xl w-full md:w-auto shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-10 h-10 bg-brand-50 rounded flex items-center justify-center text-brand-600 text-xl shrink-0"><i class="fa-solid fa-building"></i></div>
+                    <div>
+                        <div class="font-black text-slate-900 text-xs tracking-wide">MCA REGISTERED</div>
+                        <div class="text-[10px] text-slate-500 font-medium mt-0.5">CIN: U62011AP2026PTC124726</div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-4 px-6 py-4 bg-white border border-slate-200 rounded-xl w-full md:w-auto shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-10 h-10 bg-brand-50 rounded flex items-center justify-center text-brand-600 text-xl shrink-0"><i class="fa-solid fa-rocket"></i></div>
+                    <div>
+                        <div class="font-black text-slate-900 text-xs tracking-wide">STARTUP INDIA</div>
+                        <div class="text-[10px] text-slate-500 font-medium mt-0.5">DPIIT: DIPP250727</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center mt-8 text-[10px] md:text-xs font-medium text-slate-500 text-center md:text-left gap-4">
+                <p>© 2026 ZIGZEX IT SERVICES PRIVATE LIMITED. All Rights Reserved. <br class="md:hidden"><span class="md:ml-2">Madhurawada, Visakhapatnam</span></p>
+                <div class="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+                    <span>Designed for Enterprise Scale.</span>
+                    <span class="text-slate-500/10 hover:text-slate-400 transition-colors duration-500 cursor-default select-none text-[9px] uppercase tracking-widest font-bold">Developed by Indra</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="contact-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[9999] flex items-center justify-center p-4" onclick="if(event.target.id === 'contact-modal')hideContactModal()">
+        <div class="bg-white max-w-lg w-full rounded-2xl p-6 md:p-8 relative shadow-2xl" onclick="event.stopImmediatePropagation()">
+            <button onclick="hideContactModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-900 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="font-heading text-2xl md:text-3xl font-bold text-slate-900 mb-6">Request Architecture Audit</h3>
+            <form id="contact-form" onsubmit="handleSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-[10px] uppercase tracking-widest font-bold text-slate-500 mb-1">Full Name</label>
+                    <input type="text" required class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 outline-none focus:border-brand-600 text-sm text-slate-900 font-medium">
+                </div>
+                <div>
+                    <label class="block text-[10px] uppercase tracking-widest font-bold text-slate-500 mb-1">Corporate Email</label>
+                    <input type="email" required class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 outline-none focus:border-brand-600 text-sm text-slate-900 font-medium">
+                </div>
+                <div>
+                    <label class="block text-[10px] uppercase tracking-widest font-bold text-slate-500 mb-1">Project Scope</label>
+                    <textarea rows="3" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 outline-none focus:border-brand-600 text-sm text-slate-900 font-medium resize-none"></textarea>
+                </div>
+                <button type="submit" class="w-full mt-2 py-3.5 bg-brand-950 text-white text-sm font-bold rounded-lg hover:bg-brand-800 transition-colors">Submit Request</button>
+            </form>
+        </div>
+    </div>
+    
+    
+</body>
+<script type="module">
+    
+       // --- 1. FIREBASE SETUP & IMPORTS ---
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyCDjYLJRXjCtxqIa7s1rsIKBp1s0-vgEss",
+    authDomain: "zigzex-it.firebaseapp.com",
+    projectId: "zigzex-it",
+    storageBucket: "zigzex-it.firebasestorage.app",
+    messagingSenderId: "900599050764",
+    appId: "1:900599050764:web:8520e1f5ea557dfd48b429",
+    measurementId: "G-50PKDHSKJF"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// --- 2. UI & MODAL UTILS ---
+window.showContactModal = function() {
+    document.getElementById('contact-modal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+window.hideContactModal = function() {
+    document.getElementById('contact-modal').classList.add('hidden');
+    document.body.style.overflow = 'auto';
+}
+window.smoothScrollTo = function(id) {
+    const el = document.getElementById(id);
+    if(el) {
+        const offset = 80;
+        const top = el.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+    }
+}
+window.handleSubmit = function(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing...';
+    setTimeout(() => {
+        btn.innerHTML = '✅ Received';
+        btn.classList.replace('bg-brand-950', 'bg-emerald-600');
+        setTimeout(() => { window.hideContactModal(); e.target.reset(); btn.innerHTML = 'Submit Request'; btn.classList.replace('bg-emerald-600', 'bg-brand-950'); }, 1500);
+    }, 1000);
+}
+
+// --- 3. SCROLL REVEAL & COUNTERS ---
+function initScrollReveal() {
+    const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -20px 0px" };
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                entry.target.classList.add('active');
+                const counters = entry.target.querySelectorAll('.counter');
+                counters.forEach(counter => {
+                    if(!counter.classList.contains('counted')) {
+                        const target = +counter.getAttribute('data-target');
+                        let current = 0;
+                        const increment = target / 40;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if(current >= target) {
+                                counter.innerText = target;
+                                counter.classList.add('counted');
+                                clearInterval(timer);
+                            } else {
+                                counter.innerText = Math.floor(current);
+                            }
+                        }, 30);
+                    }
+                });
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+// --- 4. FIREBASE REST API & COMPACT GRID ---
+let allProjects = [];
+let currentStatusFilter = 'All';
+
+async function fetchAPIProjects() {
+    const statusText = document.getElementById('api-status');
+    try {
+        statusText.innerHTML = '<i class="fa-solid fa-server mr-2 text-brand-600"></i> Connecting to Firebase...';
+        
+        // Fetch data directly from Firestore
+        const querySnapshot = await getDocs(collection(db, "projects"));
+        
+        // Map Firestore documents to our array format
+        allProjects = querySnapshot.docs.map(doc => {
+            return {
+                id: doc.id, // The automatic Firebase ID
+                ...doc.data() // Your 12 fields
+            };
+        });
+        
+        // Filter out hidden projects (if isVisible is false)
+        allProjects = allProjects.filter(p => p.isVisible !== false);
+
+        statusText.style.display = 'none';
+    } catch (err) {
+        console.error("Firebase Error:", err);
+        statusText.innerHTML = '<i class="fa-solid fa-triangle-exclamation mr-1"></i> Database Connection Failed';
+        statusText.classList.replace('text-brand-600', 'text-red-500');
+    }
+    populateIndustryFilter();
+    applyFilters();
+}
+
+function populateIndustryFilter() {
+    const indSelect = document.getElementById('industryFilter');
+    // Clear existing options except the first one
+    indSelect.innerHTML = '<option value="All">All Industries</option>';
+    const industries = [...new Set(allProjects.map(p => p.industry).filter(Boolean))];
+    industries.forEach(ind => {
+        const opt = document.createElement('option');
+        opt.value = ind; opt.innerText = ind;
+        indSelect.appendChild(opt);
+    });
+}
+
+window.setQuickStatus = function(status) {
+    currentStatusFilter = status;
+    document.querySelectorAll('.status-btn').forEach(btn => {
+        const btnText = btn.innerText.trim();
+        const isMatch = (status === 'All' && btnText === 'All') || 
+                        (status === 'Live' && btnText === 'Live') || 
+                        (status === 'In Development' && btnText === 'In Dev');
+        
+        if(isMatch) {
+            btn.className = 'status-btn active px-4 py-1.5 md:py-2 text-xs font-bold rounded-md bg-white text-brand-700 shadow-sm border border-slate-200 transition-colors';
+        } else {
+            btn.className = 'status-btn px-4 py-1.5 md:py-2 text-xs font-bold rounded-md text-slate-500 hover:text-slate-900 transition-colors';
+        }
+    });
+    applyFilters();
+}
+
+function renderProjects(projectsArray) {
+    const grid = document.getElementById('api-projects-grid');
+    grid.innerHTML = '';
+    
+    if(projectsArray.length === 0) {
+        grid.innerHTML = `<div class="col-span-full text-center py-12 text-sm font-bold text-slate-400 border-2 border-dashed border-slate-200 rounded-xl">No engineering projects found.</div>`;
+        return;
+    }
+    
+    projectsArray.forEach((p, index) => {
+        let sCol = 'bg-blue-50 text-blue-600 border-blue-200';
+        if(p.status && p.status.toLowerCase() === 'live') sCol = 'bg-emerald-50 text-emerald-600 border-emerald-200';
+        if(p.status && p.status.toLowerCase().includes('dev')) sCol = 'bg-amber-50 text-amber-600 border-amber-200';
+        
+        const techHTML = (p.technologies || []).map(t => {
+            const techName = t.technology ? t.technology : t;
+            return `<span class="whitespace-nowrap bg-slate-100 text-slate-600 border border-slate-200 text-[9px] md:text-[10px] font-bold px-1.5 py-0.5 rounded">${techName}</span>`;
+        }).join('');
+
+        // Pin featured projects with a visual indicator
+        const featuredBadge = p.isFeatured ? `<div class="absolute top-2 left-2 bg-amber-400 text-white border border-amber-500 text-[8px] md:text-[9px] font-bold uppercase px-2 py-0.5 rounded shadow-sm z-10"><i class="fa-solid fa-star"></i> Featured</div>` : '';
+
+        const card = `
+        <div class="compact-card bg-white rounded-xl md:rounded-2xl p-3 md:p-5 flex flex-col h-full border ${p.isFeatured ? 'border-amber-200 shadow-md' : 'border-slate-200 shadow-sm'}" style="animation: fadeIn 0.4s ease forwards ${index * 0.05}s; opacity: 0;">
+            <div class="relative h-24 md:h-36 rounded-lg overflow-hidden mb-3 md:mb-4 bg-slate-100">
+                ${featuredBadge}
+                <img src="${p.thumbnailUrl || ''}" class="w-full h-full object-cover">
+                <div class="absolute top-2 right-2 ${sCol} border text-[8px] md:text-[9px] font-bold uppercase px-2 py-0.5 rounded shadow-sm">${p.status || 'Unknown'}</div>
+            </div>
+            <div class="text-[8px] md:text-[10px] font-bold text-brand-600 mb-1 uppercase tracking-wider truncate">
+                ${p.industry || 'Tech'} <span class="text-slate-300 mx-0.5">•</span> ${p.businessType || 'Project'}
+            </div>
+            <h3 class="font-heading text-sm md:text-lg font-bold text-slate-900 mb-1 md:mb-2 leading-tight line-clamp-2">${p.projectTitle || 'Untitled'}</h3>
+            <p class="text-slate-500 text-[10px] md:text-xs font-medium mb-3 md:mb-4 flex-grow line-clamp-2 md:line-clamp-3">${p.shortDescription || ''}</p>
+            <div class="flex overflow-x-auto no-scrollbar gap-1 mb-3 md:mb-4 pb-1">${techHTML}</div>
+            <div class="mt-auto pt-2 md:pt-3 border-t border-slate-100 flex justify-between items-center text-[9px] md:text-[11px] font-bold">
+                <span class="text-slate-400">${p.liveDate ? p.liveDate.split('-')[0] : 'N/A'}</span>
+                ${p.liveUrl ? `<a href="${p.liveUrl}" target="_blank" class="text-brand-600 hover:text-brand-800 flex items-center gap-1">Visit <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i></a>` : ''}
+            </div>
+        </div>`;
+        grid.insertAdjacentHTML('beforeend', card);
+    });
+}
+
+function applyFilters() {
+    const term = document.getElementById('searchInput').value.toLowerCase();
+    const ind = document.getElementById('industryFilter').value;
+    const sort = document.getElementById('sortFilter').value;
+    
+    let filtered = allProjects.filter(p => {
+        const titleMatch = (p.projectTitle || '').toLowerCase().includes(term);
+        const indMatch = (p.industry || '').toLowerCase().includes(term);
+        const techMatch = (p.technologies || []).some(t => {
+            const techName = t.technology ? t.technology : t;
+            return techName.toLowerCase().includes(term);
+        });
+        
+        const matchSearch = titleMatch || indMatch || techMatch;
+        const matchInd = ind === 'All' || p.industry === ind;
+        const matchStatus = currentStatusFilter === 'All' || (p.status || '').includes(currentStatusFilter);
+        
+        return matchSearch && matchInd && matchStatus;
+    });
+    
+    // Sort logic: Featured always top, then apply chosen sort
+    filtered.sort((a, b) => {
+        if (a.isFeatured && !b.isFeatured) return -1;
+        if (!a.isFeatured && b.isFeatured) return 1;
+        
+        if (sort === 'newest') return new Date(b.liveDate || 0) - new Date(a.liveDate || 0);
+        if (sort === 'oldest') return new Date(a.liveDate || 0) - new Date(b.liveDate || 0);
+        return (a.projectTitle || '').localeCompare(b.projectTitle || '');
+    });
+    
+    renderProjects(filtered);
+}
+
+document.getElementById('searchInput').addEventListener('input', applyFilters);
+document.getElementById('industryFilter').addEventListener('change', applyFilters);
+document.getElementById('sortFilter').addEventListener('change', applyFilters);
+
+const style = document.createElement('style');
+style.innerHTML = `@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }`;
+document.head.appendChild(style);
+
+// --- 5. INITIALIZE ---
+window.onload = () => {
+    initScrollReveal();
+    fetchAPIProjects();
+};
+    
+</script>
+</html>

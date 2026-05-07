@@ -842,7 +842,7 @@
 <script type="module">
     // --- 1. FIREBASE SETUP & IMPORTS ---
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getFirestore, collection, getDocs, query, orderBy, limit, startAfter } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyCDjYLJRXjCtxqIa7s1rsIKBp1s0-vgEss",
@@ -857,7 +857,7 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // --- 2. UI & MODAL UTILS (Attached to window for module scope) ---
+    // --- 2. UI & MODAL UTILS ---
     window.showContactModal = function() {
         document.getElementById('contact-modal').classList.remove('hidden');
         document.body.style.overflow = 'hidden';
@@ -885,7 +885,6 @@
         }, 1000);
     }
 
-    // --- 3. SCROLL REVEAL & COUNTERS ---
     function initScrollReveal() {
         const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -20px 0px" };
         const revealObserver = new IntersectionObserver((entries) => {
@@ -917,76 +916,35 @@
         document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
     }
 
-    // --- 4. FIREBASE REST API & PAGINATION LOGIC ---
-    let allProjects = [];
-    let currentStatusFilter = 'All';
+    // --- 3. FRONTEND PAGINATION & FILTER LOGIC ---
+    let allProjects = [];       // Holds all data from Firebase
+    let filteredProjects = [];  // Holds data after search/filters are applied
     
-    // Pagination Variables
-    let lastVisibleDoc = null; 
-    const PROJECTS_PER_PAGE = 8; 
-    let isFetching = false;
+    let currentStatusFilter = 'All';
+    const ITEMS_PER_PAGE = 8;
+    let visibleCount = ITEMS_PER_PAGE; 
 
-    window.fetchAPIProjects = async function(isLoadMore = false) {
-        if (isFetching) return;
-        isFetching = true;
-        
+    // Fetch EVERYTHING once
+    window.fetchAPIProjects = async function() {
         const statusText = document.getElementById('api-status');
-        const loadMoreBtn = document.getElementById('loadMoreBtn');
         
         try {
-            if (!isLoadMore) {
-                if(statusText) statusText.style.display = 'block';
-                if(statusText) statusText.innerHTML = '<i class="fa-solid fa-server mr-2 text-brand-600"></i> Connecting to Firebase...';
-                allProjects = []; 
-                lastVisibleDoc = null; // Reset pagination on fresh load
-            } else if (loadMoreBtn) {
-                loadMoreBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Loading...';
+            if(statusText) {
+                statusText.style.display = 'block';
+                statusText.innerHTML = '<i class="fa-solid fa-server mr-2 text-brand-600"></i> Connecting to Firebase...';
             }
 
-            let projectsQuery;
-            const projectsRef = collection(db, "projects");
-
-            if (isLoadMore && lastVisibleDoc) {
-                projectsQuery = query(
-                    projectsRef, 
-                    orderBy("liveDate", "desc"), 
-                    startAfter(lastVisibleDoc), 
-                    limit(PROJECTS_PER_PAGE)
-                );
-            } else {
-                projectsQuery = query(
-                    projectsRef, 
-                    orderBy("liveDate", "desc"), 
-                    limit(PROJECTS_PER_PAGE)
-                );
-            }
-
-            const querySnapshot = await getDocs(projectsQuery);
+            const querySnapshot = await getDocs(collection(db, "projects"));
             
-            // Save the cursor for the next batch
-            lastVisibleDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
-
-            const newProjects = querySnapshot.docs.map(doc => ({
+            allProjects = querySnapshot.docs.map(doc => ({
                 id: doc.id,
                 ...doc.data()
             })).filter(p => p.isVisible !== false);
 
-            allProjects = [...allProjects, ...newProjects]; 
-            
             if(statusText) statusText.style.display = 'none';
             
             populateIndustryFilter();
-            applyFilters();
-
-            // Handle Button Visibility
-            if (loadMoreBtn) {
-                loadMoreBtn.innerHTML = 'Load More Projects <i class="fa-solid fa-angle-down ml-2 text-slate-400"></i>';
-                if (querySnapshot.docs.length < PROJECTS_PER_PAGE) {
-                    loadMoreBtn.style.display = 'none';
-                } else {
-                    loadMoreBtn.style.display = 'inline-flex';
-                }
-            }
+            applyFilters(); // Apply filters will trigger render
 
         } catch (err) {
             console.error("Firebase Error:", err);
@@ -994,13 +952,12 @@
                 statusText.innerHTML = '<i class="fa-solid fa-triangle-exclamation mr-1"></i> Database Connection Failed';
                 statusText.classList.replace('text-brand-600', 'text-red-500');
             }
-        } finally {
-            isFetching = false;
         }
     }
 
     function populateIndustryFilter() {
         const indSelect = document.getElementById('industryFilter');
+        if (!indSelect) return;
         indSelect.innerHTML = '<option value="All">All Industries</option>';
         const industries = [...new Set(allProjects.map(p => p.industry).filter(Boolean))];
         industries.forEach(ind => {
@@ -1027,16 +984,68 @@
         applyFilters();
     }
 
-    function renderProjects(projectsArray) {
+    // Apply search and sorting to the master array
+    function applyFilters() {
+        const searchInput = document.getElementById('searchInput');
+        const indSelect = document.getElementById('industryFilter');
+        const sortSelect = document.getElementById('sortFilter');
+        
+        const term = searchInput ? searchInput.value.toLowerCase() : '';
+        const ind = indSelect ? indSelect.value : 'All';
+        const sort = sortSelect ? sortSelect.value : 'newest';
+        
+        filteredProjects = allProjects.filter(p => {
+            const titleMatch = (p.projectTitle || '').toLowerCase().includes(term);
+            const indMatch = (p.industry || '').toLowerCase().includes(term);
+            const techMatch = (p.technologies || []).some(t => {
+                const techName = t.technology ? t.technology : t;
+                return techName.toLowerCase().includes(term);
+            });
+            
+            const matchSearch = titleMatch || indMatch || techMatch;
+            const matchInd = ind === 'All' || p.industry === ind;
+            const matchStatus = currentStatusFilter === 'All' || (p.status || '').includes(currentStatusFilter);
+            
+            return matchSearch && matchInd && matchStatus;
+        });
+        
+        // Sorting logic
+        filteredProjects.sort((a, b) => {
+            if (a.isFeatured && !b.isFeatured) return -1;
+            if (!a.isFeatured && b.isFeatured) return 1;
+            
+            if (sort === 'newest') return new Date(b.liveDate || 0) - new Date(a.liveDate || 0);
+            if (sort === 'oldest') return new Date(a.liveDate || 0) - new Date(b.liveDate || 0);
+            return (a.projectTitle || '').localeCompare(b.projectTitle || '');
+        });
+        
+        // Reset visible count back to default whenever user searches/filters
+        visibleCount = ITEMS_PER_PAGE;
+        renderProjects();
+    }
+
+    // This function handles increasing the visible count
+    window.loadMoreProjects = function() {
+        visibleCount += ITEMS_PER_PAGE;
+        renderProjects();
+    }
+
+    // Slice the filtered array based on visibleCount and render
+    function renderProjects() {
         const grid = document.getElementById('api-projects-grid');
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
         grid.innerHTML = '';
         
-        if(projectsArray.length === 0) {
-            grid.innerHTML = `<div class="col-span-full text-center py-12 text-sm font-bold text-slate-400 border-2 border-dashed border-slate-200 rounded-xl">No engineering projects found.</div>`;
+        if(filteredProjects.length === 0) {
+            grid.innerHTML = `<div class="col-span-full text-center py-12 text-sm font-bold text-slate-400 border-2 border-dashed border-slate-200 rounded-xl">No engineering projects found matching your search.</div>`;
+            if (loadMoreBtn) loadMoreBtn.style.display = 'none';
             return;
         }
+
+        // Only take the portion we are allowed to show
+        const projectsToRender = filteredProjects.slice(0, visibleCount);
         
-        projectsArray.forEach((p, index) => {
+        projectsToRender.forEach((p, index) => {
             let sCol = 'bg-blue-50 text-blue-600 border-blue-200';
             if(p.status && p.status.toLowerCase() === 'live') sCol = 'bg-emerald-50 text-emerald-600 border-emerald-200';
             if(p.status && p.status.toLowerCase().includes('dev')) sCol = 'bg-amber-50 text-amber-600 border-amber-200';
@@ -1052,7 +1061,7 @@
             <div class="compact-card bg-white rounded-xl md:rounded-2xl p-3 md:p-5 flex flex-col h-full border ${p.isFeatured ? 'border-amber-200 shadow-md' : 'border-slate-200 shadow-sm'}" style="animation: fadeIn 0.4s ease forwards ${index * 0.05}s; opacity: 0;">
                 <div class="relative h-24 md:h-36 rounded-lg overflow-hidden mb-3 md:mb-4 bg-slate-100">
                     ${featuredBadge}
-                    <img src="${p.thumbnailUrl || ''}" class="w-full h-full object-cover">
+                    <img src="${p.thumbnailUrl || ''}" loading="lazy" class="w-full h-full object-cover">
                     <div class="absolute top-2 right-2 ${sCol} border text-[8px] md:text-[9px] font-bold uppercase px-2 py-0.5 rounded shadow-sm">${p.status || 'Unknown'}</div>
                 </div>
                 <div class="text-[8px] md:text-[10px] font-bold text-brand-600 mb-1 uppercase tracking-wider truncate">
@@ -1068,38 +1077,15 @@
             </div>`;
             grid.insertAdjacentHTML('beforeend', card);
         });
-    }
 
-    function applyFilters() {
-        const term = document.getElementById('searchInput').value.toLowerCase();
-        const ind = document.getElementById('industryFilter').value;
-        const sort = document.getElementById('sortFilter').value;
-        
-        let filtered = allProjects.filter(p => {
-            const titleMatch = (p.projectTitle || '').toLowerCase().includes(term);
-            const indMatch = (p.industry || '').toLowerCase().includes(term);
-            const techMatch = (p.technologies || []).some(t => {
-                const techName = t.technology ? t.technology : t;
-                return techName.toLowerCase().includes(term);
-            });
-            
-            const matchSearch = titleMatch || indMatch || techMatch;
-            const matchInd = ind === 'All' || p.industry === ind;
-            const matchStatus = currentStatusFilter === 'All' || (p.status || '').includes(currentStatusFilter);
-            
-            return matchSearch && matchInd && matchStatus;
-        });
-        
-        filtered.sort((a, b) => {
-            if (a.isFeatured && !b.isFeatured) return -1;
-            if (!a.isFeatured && b.isFeatured) return 1;
-            
-            if (sort === 'newest') return new Date(b.liveDate || 0) - new Date(a.liveDate || 0);
-            if (sort === 'oldest') return new Date(a.liveDate || 0) - new Date(b.liveDate || 0);
-            return (a.projectTitle || '').localeCompare(b.projectTitle || '');
-        });
-        
-        renderProjects(filtered);
+        // Hide Load More button if we have shown all available filtered projects
+        if (loadMoreBtn) {
+            if (visibleCount >= filteredProjects.length) {
+                loadMoreBtn.style.display = 'none';
+            } else {
+                loadMoreBtn.style.display = 'inline-flex';
+            }
+        }
     }
 
     // Event Listeners for Filters
@@ -1112,15 +1098,14 @@
     const sortFilter = document.getElementById('sortFilter');
     if(sortFilter) sortFilter.addEventListener('change', applyFilters);
 
-    // CSS Animation Injector
     const style = document.createElement('style');
     style.innerHTML = `@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }`;
     document.head.appendChild(style);
 
-    // --- 5. INITIALIZE ---
+    // --- 4. INITIALIZE ---
     window.onload = () => {
         initScrollReveal();
-        window.fetchAPIProjects(false); // Fetch initial batch on load
+        window.fetchAPIProjects();
     };
 </script>
 </html>

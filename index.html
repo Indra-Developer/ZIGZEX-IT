@@ -468,6 +468,12 @@
             </div>
         </div>
     </section>
+    <div class="mt-10 md:mt-12 text-center">
+        <button id="loadMoreBtn" onclick="window.fetchAPIProjects(true)"
+            class="hidden px-8 py-3.5 bg-white border border-slate-200 text-slate-700 text-sm font-bold rounded-xl shadow-sm hover:bg-slate-50 hover:shadow transition-all items-center gap-2 mx-auto">
+            Load More Projects <i class="fa-solid fa-angle-down ml-1 text-slate-400"></i>
+        </button>
+    </div>
 
     <section id="tech-stack" class="py-16 md:py-24 bg-gradient-to-br from-slate-900 via-brand-950 to-slate-900 text-white reveal overflow-hidden relative">
         <div class="absolute inset-0 opacity-10">
@@ -834,236 +840,287 @@
     
 </body>
 <script type="module">
-    
-       // --- 1. FIREBASE SETUP & IMPORTS ---
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+    // --- 1. FIREBASE SETUP & IMPORTS ---
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getFirestore, collection, getDocs, query, orderBy, limit, startAfter } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyCDjYLJRXjCtxqIa7s1rsIKBp1s0-vgEss",
-    authDomain: "zigzex-it.firebaseapp.com",
-    projectId: "zigzex-it",
-    storageBucket: "zigzex-it.firebasestorage.app",
-    messagingSenderId: "900599050764",
-    appId: "1:900599050764:web:8520e1f5ea557dfd48b429",
-    measurementId: "G-50PKDHSKJF"
-};
+    const firebaseConfig = {
+        apiKey: "AIzaSyCDjYLJRXjCtxqIa7s1rsIKBp1s0-vgEss",
+        authDomain: "zigzex-it.firebaseapp.com",
+        projectId: "zigzex-it",
+        storageBucket: "zigzex-it.firebasestorage.app",
+        messagingSenderId: "900599050764",
+        appId: "1:900599050764:web:8520e1f5ea557dfd48b429",
+        measurementId: "G-50PKDHSKJF"
+    };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-// --- 2. UI & MODAL UTILS ---
-window.showContactModal = function() {
-    document.getElementById('contact-modal').classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-}
-window.hideContactModal = function() {
-    document.getElementById('contact-modal').classList.add('hidden');
-    document.body.style.overflow = 'auto';
-}
-window.smoothScrollTo = function(id) {
-    const el = document.getElementById(id);
-    if(el) {
-        const offset = 80;
-        const top = el.getBoundingClientRect().top + window.scrollY - offset;
-        window.scrollTo({ top, behavior: 'smooth' });
+    // --- 2. UI & MODAL UTILS (Attached to window for module scope) ---
+    window.showContactModal = function() {
+        document.getElementById('contact-modal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
     }
-}
-window.handleSubmit = function(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('button[type="submit"]');
-    btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing...';
-    setTimeout(() => {
-        btn.innerHTML = '✅ Received';
-        btn.classList.replace('bg-brand-950', 'bg-emerald-600');
-        setTimeout(() => { window.hideContactModal(); e.target.reset(); btn.innerHTML = 'Submit Request'; btn.classList.replace('bg-emerald-600', 'bg-brand-950'); }, 1500);
-    }, 1000);
-}
+    window.hideContactModal = function() {
+        document.getElementById('contact-modal').classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    }
+    window.smoothScrollTo = function(id) {
+        const el = document.getElementById(id);
+        if(el) {
+            const offset = 80;
+            const top = el.getBoundingClientRect().top + window.scrollY - offset;
+            window.scrollTo({ top, behavior: 'smooth' });
+        }
+    }
+    window.handleSubmit = function(e) {
+        e.preventDefault();
+        const btn = e.target.querySelector('button[type="submit"]');
+        btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing...';
+        setTimeout(() => {
+            btn.innerHTML = '✅ Received';
+            btn.classList.replace('bg-brand-950', 'bg-emerald-600');
+            setTimeout(() => { window.hideContactModal(); e.target.reset(); btn.innerHTML = 'Submit Request'; btn.classList.replace('bg-emerald-600', 'bg-brand-950'); }, 1500);
+        }, 1000);
+    }
 
-// --- 3. SCROLL REVEAL & COUNTERS ---
-function initScrollReveal() {
-    const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -20px 0px" };
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting) {
-                entry.target.classList.add('active');
-                const counters = entry.target.querySelectorAll('.counter');
-                counters.forEach(counter => {
-                    if(!counter.classList.contains('counted')) {
-                        const target = +counter.getAttribute('data-target');
-                        let current = 0;
-                        const increment = target / 40;
-                        const timer = setInterval(() => {
-                            current += increment;
-                            if(current >= target) {
-                                counter.innerText = target;
-                                counter.classList.add('counted');
-                                clearInterval(timer);
-                            } else {
-                                counter.innerText = Math.floor(current);
-                            }
-                        }, 30);
-                    }
-                });
-                revealObserver.unobserve(entry.target);
+    // --- 3. SCROLL REVEAL & COUNTERS ---
+    function initScrollReveal() {
+        const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -20px 0px" };
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    const counters = entry.target.querySelectorAll('.counter');
+                    counters.forEach(counter => {
+                        if(!counter.classList.contains('counted')) {
+                            const target = +counter.getAttribute('data-target');
+                            let current = 0;
+                            const increment = target / 40;
+                            const timer = setInterval(() => {
+                                current += increment;
+                                if(current >= target) {
+                                    counter.innerText = target;
+                                    counter.classList.add('counted');
+                                    clearInterval(timer);
+                                } else {
+                                    counter.innerText = Math.floor(current);
+                                }
+                            }, 30);
+                        }
+                    });
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    }
+
+    // --- 4. FIREBASE REST API & PAGINATION LOGIC ---
+    let allProjects = [];
+    let currentStatusFilter = 'All';
+    
+    // Pagination Variables
+    let lastVisibleDoc = null; 
+    const PROJECTS_PER_PAGE = 8; 
+    let isFetching = false;
+
+    window.fetchAPIProjects = async function(isLoadMore = false) {
+        if (isFetching) return;
+        isFetching = true;
+        
+        const statusText = document.getElementById('api-status');
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        
+        try {
+            if (!isLoadMore) {
+                if(statusText) statusText.style.display = 'block';
+                if(statusText) statusText.innerHTML = '<i class="fa-solid fa-server mr-2 text-brand-600"></i> Connecting to Firebase...';
+                allProjects = []; 
+                lastVisibleDoc = null; // Reset pagination on fresh load
+            } else if (loadMoreBtn) {
+                loadMoreBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Loading...';
+            }
+
+            let projectsQuery;
+            const projectsRef = collection(db, "projects");
+
+            if (isLoadMore && lastVisibleDoc) {
+                projectsQuery = query(
+                    projectsRef, 
+                    orderBy("liveDate", "desc"), 
+                    startAfter(lastVisibleDoc), 
+                    limit(PROJECTS_PER_PAGE)
+                );
+            } else {
+                projectsQuery = query(
+                    projectsRef, 
+                    orderBy("liveDate", "desc"), 
+                    limit(PROJECTS_PER_PAGE)
+                );
+            }
+
+            const querySnapshot = await getDocs(projectsQuery);
+            
+            // Save the cursor for the next batch
+            lastVisibleDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
+
+            const newProjects = querySnapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            })).filter(p => p.isVisible !== false);
+
+            allProjects = [...allProjects, ...newProjects]; 
+            
+            if(statusText) statusText.style.display = 'none';
+            
+            populateIndustryFilter();
+            applyFilters();
+
+            // Handle Button Visibility
+            if (loadMoreBtn) {
+                loadMoreBtn.innerHTML = 'Load More Projects <i class="fa-solid fa-angle-down ml-2 text-slate-400"></i>';
+                if (querySnapshot.docs.length < PROJECTS_PER_PAGE) {
+                    loadMoreBtn.style.display = 'none';
+                } else {
+                    loadMoreBtn.style.display = 'inline-flex';
+                }
+            }
+
+        } catch (err) {
+            console.error("Firebase Error:", err);
+            if(statusText) {
+                statusText.innerHTML = '<i class="fa-solid fa-triangle-exclamation mr-1"></i> Database Connection Failed';
+                statusText.classList.replace('text-brand-600', 'text-red-500');
+            }
+        } finally {
+            isFetching = false;
+        }
+    }
+
+    function populateIndustryFilter() {
+        const indSelect = document.getElementById('industryFilter');
+        indSelect.innerHTML = '<option value="All">All Industries</option>';
+        const industries = [...new Set(allProjects.map(p => p.industry).filter(Boolean))];
+        industries.forEach(ind => {
+            const opt = document.createElement('option');
+            opt.value = ind; opt.innerText = ind;
+            indSelect.appendChild(opt);
+        });
+    }
+
+    window.setQuickStatus = function(status) {
+        currentStatusFilter = status;
+        document.querySelectorAll('.status-btn').forEach(btn => {
+            const btnText = btn.innerText.trim();
+            const isMatch = (status === 'All' && btnText === 'All') || 
+                            (status === 'Live' && btnText === 'Live') || 
+                            (status === 'In Development' && btnText === 'In Dev');
+            
+            if(isMatch) {
+                btn.className = 'status-btn active px-4 py-1.5 md:py-2 text-xs font-bold rounded-md bg-white text-brand-700 shadow-sm border border-slate-200 transition-colors';
+            } else {
+                btn.className = 'status-btn px-4 py-1.5 md:py-2 text-xs font-bold rounded-md text-slate-500 hover:text-slate-900 transition-colors';
             }
         });
-    }, observerOptions);
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-}
-
-// --- 4. FIREBASE REST API & COMPACT GRID ---
-let allProjects = [];
-let currentStatusFilter = 'All';
-
-async function fetchAPIProjects() {
-    const statusText = document.getElementById('api-status');
-    try {
-        statusText.innerHTML = '<i class="fa-solid fa-server mr-2 text-brand-600"></i> Connecting to Firebase...';
-        
-        // Fetch data directly from Firestore
-        const querySnapshot = await getDocs(collection(db, "projects"));
-        
-        // Map Firestore documents to our array format
-        allProjects = querySnapshot.docs.map(doc => {
-            return {
-                id: doc.id, // The automatic Firebase ID
-                ...doc.data() // Your 12 fields
-            };
-        });
-        
-        // Filter out hidden projects (if isVisible is false)
-        allProjects = allProjects.filter(p => p.isVisible !== false);
-
-        statusText.style.display = 'none';
-    } catch (err) {
-        console.error("Firebase Error:", err);
-        statusText.innerHTML = '<i class="fa-solid fa-triangle-exclamation mr-1"></i> Database Connection Failed';
-        statusText.classList.replace('text-brand-600', 'text-red-500');
+        applyFilters();
     }
-    populateIndustryFilter();
-    applyFilters();
-}
 
-function populateIndustryFilter() {
-    const indSelect = document.getElementById('industryFilter');
-    // Clear existing options except the first one
-    indSelect.innerHTML = '<option value="All">All Industries</option>';
-    const industries = [...new Set(allProjects.map(p => p.industry).filter(Boolean))];
-    industries.forEach(ind => {
-        const opt = document.createElement('option');
-        opt.value = ind; opt.innerText = ind;
-        indSelect.appendChild(opt);
-    });
-}
-
-window.setQuickStatus = function(status) {
-    currentStatusFilter = status;
-    document.querySelectorAll('.status-btn').forEach(btn => {
-        const btnText = btn.innerText.trim();
-        const isMatch = (status === 'All' && btnText === 'All') || 
-                        (status === 'Live' && btnText === 'Live') || 
-                        (status === 'In Development' && btnText === 'In Dev');
+    function renderProjects(projectsArray) {
+        const grid = document.getElementById('api-projects-grid');
+        grid.innerHTML = '';
         
-        if(isMatch) {
-            btn.className = 'status-btn active px-4 py-1.5 md:py-2 text-xs font-bold rounded-md bg-white text-brand-700 shadow-sm border border-slate-200 transition-colors';
-        } else {
-            btn.className = 'status-btn px-4 py-1.5 md:py-2 text-xs font-bold rounded-md text-slate-500 hover:text-slate-900 transition-colors';
+        if(projectsArray.length === 0) {
+            grid.innerHTML = `<div class="col-span-full text-center py-12 text-sm font-bold text-slate-400 border-2 border-dashed border-slate-200 rounded-xl">No engineering projects found.</div>`;
+            return;
         }
-    });
-    applyFilters();
-}
-
-function renderProjects(projectsArray) {
-    const grid = document.getElementById('api-projects-grid');
-    grid.innerHTML = '';
-    
-    if(projectsArray.length === 0) {
-        grid.innerHTML = `<div class="col-span-full text-center py-12 text-sm font-bold text-slate-400 border-2 border-dashed border-slate-200 rounded-xl">No engineering projects found.</div>`;
-        return;
-    }
-    
-    projectsArray.forEach((p, index) => {
-        let sCol = 'bg-blue-50 text-blue-600 border-blue-200';
-        if(p.status && p.status.toLowerCase() === 'live') sCol = 'bg-emerald-50 text-emerald-600 border-emerald-200';
-        if(p.status && p.status.toLowerCase().includes('dev')) sCol = 'bg-amber-50 text-amber-600 border-amber-200';
         
-        const techHTML = (p.technologies || []).map(t => {
-            const techName = t.technology ? t.technology : t;
-            return `<span class="whitespace-nowrap bg-slate-100 text-slate-600 border border-slate-200 text-[9px] md:text-[10px] font-bold px-1.5 py-0.5 rounded">${techName}</span>`;
-        }).join('');
+        projectsArray.forEach((p, index) => {
+            let sCol = 'bg-blue-50 text-blue-600 border-blue-200';
+            if(p.status && p.status.toLowerCase() === 'live') sCol = 'bg-emerald-50 text-emerald-600 border-emerald-200';
+            if(p.status && p.status.toLowerCase().includes('dev')) sCol = 'bg-amber-50 text-amber-600 border-amber-200';
+            
+            const techHTML = (p.technologies || []).map(t => {
+                const techName = t.technology ? t.technology : t;
+                return `<span class="whitespace-nowrap bg-slate-100 text-slate-600 border border-slate-200 text-[9px] md:text-[10px] font-bold px-1.5 py-0.5 rounded">${techName}</span>`;
+            }).join('');
 
-        // Pin featured projects with a visual indicator
-        const featuredBadge = p.isFeatured ? `<div class="absolute top-2 left-2 bg-amber-400 text-white border border-amber-500 text-[8px] md:text-[9px] font-bold uppercase px-2 py-0.5 rounded shadow-sm z-10"><i class="fa-solid fa-star"></i> Featured</div>` : '';
+            const featuredBadge = p.isFeatured ? `<div class="absolute top-2 left-2 bg-amber-400 text-white border border-amber-500 text-[8px] md:text-[9px] font-bold uppercase px-2 py-0.5 rounded shadow-sm z-10"><i class="fa-solid fa-star"></i> Featured</div>` : '';
 
-        const card = `
-        <div class="compact-card bg-white rounded-xl md:rounded-2xl p-3 md:p-5 flex flex-col h-full border ${p.isFeatured ? 'border-amber-200 shadow-md' : 'border-slate-200 shadow-sm'}" style="animation: fadeIn 0.4s ease forwards ${index * 0.05}s; opacity: 0;">
-            <div class="relative h-24 md:h-36 rounded-lg overflow-hidden mb-3 md:mb-4 bg-slate-100">
-                ${featuredBadge}
-                <img src="${p.thumbnailUrl || ''}" class="w-full h-full object-cover">
-                <div class="absolute top-2 right-2 ${sCol} border text-[8px] md:text-[9px] font-bold uppercase px-2 py-0.5 rounded shadow-sm">${p.status || 'Unknown'}</div>
-            </div>
-            <div class="text-[8px] md:text-[10px] font-bold text-brand-600 mb-1 uppercase tracking-wider truncate">
-                ${p.industry || 'Tech'} <span class="text-slate-300 mx-0.5">•</span> ${p.businessType || 'Project'}
-            </div>
-            <h3 class="font-heading text-sm md:text-lg font-bold text-slate-900 mb-1 md:mb-2 leading-tight line-clamp-2">${p.projectTitle || 'Untitled'}</h3>
-            <p class="text-slate-500 text-[10px] md:text-xs font-medium mb-3 md:mb-4 flex-grow line-clamp-2 md:line-clamp-3">${p.shortDescription || ''}</p>
-            <div class="flex overflow-x-auto no-scrollbar gap-1 mb-3 md:mb-4 pb-1">${techHTML}</div>
-            <div class="mt-auto pt-2 md:pt-3 border-t border-slate-100 flex justify-between items-center text-[9px] md:text-[11px] font-bold">
-                <span class="text-slate-400">${p.liveDate ? p.liveDate.split('-')[0] : 'N/A'}</span>
-                ${p.liveUrl ? `<a href="${p.liveUrl}" target="_blank" class="text-brand-600 hover:text-brand-800 flex items-center gap-1">Visit <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i></a>` : ''}
-            </div>
-        </div>`;
-        grid.insertAdjacentHTML('beforeend', card);
-    });
-}
+            const card = `
+            <div class="compact-card bg-white rounded-xl md:rounded-2xl p-3 md:p-5 flex flex-col h-full border ${p.isFeatured ? 'border-amber-200 shadow-md' : 'border-slate-200 shadow-sm'}" style="animation: fadeIn 0.4s ease forwards ${index * 0.05}s; opacity: 0;">
+                <div class="relative h-24 md:h-36 rounded-lg overflow-hidden mb-3 md:mb-4 bg-slate-100">
+                    ${featuredBadge}
+                    <img src="${p.thumbnailUrl || ''}" class="w-full h-full object-cover">
+                    <div class="absolute top-2 right-2 ${sCol} border text-[8px] md:text-[9px] font-bold uppercase px-2 py-0.5 rounded shadow-sm">${p.status || 'Unknown'}</div>
+                </div>
+                <div class="text-[8px] md:text-[10px] font-bold text-brand-600 mb-1 uppercase tracking-wider truncate">
+                    ${p.industry || 'Tech'} <span class="text-slate-300 mx-0.5">•</span> ${p.businessType || 'Project'}
+                </div>
+                <h3 class="font-heading text-sm md:text-lg font-bold text-slate-900 mb-1 md:mb-2 leading-tight line-clamp-2">${p.projectTitle || 'Untitled'}</h3>
+                <p class="text-slate-500 text-[10px] md:text-xs font-medium mb-3 md:mb-4 flex-grow line-clamp-2 md:line-clamp-3">${p.shortDescription || ''}</p>
+                <div class="flex overflow-x-auto no-scrollbar gap-1 mb-3 md:mb-4 pb-1">${techHTML}</div>
+                <div class="mt-auto pt-2 md:pt-3 border-t border-slate-100 flex justify-between items-center text-[9px] md:text-[11px] font-bold">
+                    <span class="text-slate-400">${p.liveDate ? p.liveDate.split('-')[0] : 'N/A'}</span>
+                    ${p.liveUrl ? `<a href="${p.liveUrl}" target="_blank" class="text-brand-600 hover:text-brand-800 flex items-center gap-1">Visit <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i></a>` : ''}
+                </div>
+            </div>`;
+            grid.insertAdjacentHTML('beforeend', card);
+        });
+    }
 
-function applyFilters() {
-    const term = document.getElementById('searchInput').value.toLowerCase();
-    const ind = document.getElementById('industryFilter').value;
-    const sort = document.getElementById('sortFilter').value;
-    
-    let filtered = allProjects.filter(p => {
-        const titleMatch = (p.projectTitle || '').toLowerCase().includes(term);
-        const indMatch = (p.industry || '').toLowerCase().includes(term);
-        const techMatch = (p.technologies || []).some(t => {
-            const techName = t.technology ? t.technology : t;
-            return techName.toLowerCase().includes(term);
+    function applyFilters() {
+        const term = document.getElementById('searchInput').value.toLowerCase();
+        const ind = document.getElementById('industryFilter').value;
+        const sort = document.getElementById('sortFilter').value;
+        
+        let filtered = allProjects.filter(p => {
+            const titleMatch = (p.projectTitle || '').toLowerCase().includes(term);
+            const indMatch = (p.industry || '').toLowerCase().includes(term);
+            const techMatch = (p.technologies || []).some(t => {
+                const techName = t.technology ? t.technology : t;
+                return techName.toLowerCase().includes(term);
+            });
+            
+            const matchSearch = titleMatch || indMatch || techMatch;
+            const matchInd = ind === 'All' || p.industry === ind;
+            const matchStatus = currentStatusFilter === 'All' || (p.status || '').includes(currentStatusFilter);
+            
+            return matchSearch && matchInd && matchStatus;
         });
         
-        const matchSearch = titleMatch || indMatch || techMatch;
-        const matchInd = ind === 'All' || p.industry === ind;
-        const matchStatus = currentStatusFilter === 'All' || (p.status || '').includes(currentStatusFilter);
+        filtered.sort((a, b) => {
+            if (a.isFeatured && !b.isFeatured) return -1;
+            if (!a.isFeatured && b.isFeatured) return 1;
+            
+            if (sort === 'newest') return new Date(b.liveDate || 0) - new Date(a.liveDate || 0);
+            if (sort === 'oldest') return new Date(a.liveDate || 0) - new Date(b.liveDate || 0);
+            return (a.projectTitle || '').localeCompare(b.projectTitle || '');
+        });
         
-        return matchSearch && matchInd && matchStatus;
-    });
-    
-    // Sort logic: Featured always top, then apply chosen sort
-    filtered.sort((a, b) => {
-        if (a.isFeatured && !b.isFeatured) return -1;
-        if (!a.isFeatured && b.isFeatured) return 1;
-        
-        if (sort === 'newest') return new Date(b.liveDate || 0) - new Date(a.liveDate || 0);
-        if (sort === 'oldest') return new Date(a.liveDate || 0) - new Date(b.liveDate || 0);
-        return (a.projectTitle || '').localeCompare(b.projectTitle || '');
-    });
-    
-    renderProjects(filtered);
-}
+        renderProjects(filtered);
+    }
 
-document.getElementById('searchInput').addEventListener('input', applyFilters);
-document.getElementById('industryFilter').addEventListener('change', applyFilters);
-document.getElementById('sortFilter').addEventListener('change', applyFilters);
-
-const style = document.createElement('style');
-style.innerHTML = `@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }`;
-document.head.appendChild(style);
-
-// --- 5. INITIALIZE ---
-window.onload = () => {
-    initScrollReveal();
-    fetchAPIProjects();
-};
+    // Event Listeners for Filters
+    const searchInput = document.getElementById('searchInput');
+    if(searchInput) searchInput.addEventListener('input', applyFilters);
     
+    const industryFilter = document.getElementById('industryFilter');
+    if(industryFilter) industryFilter.addEventListener('change', applyFilters);
+    
+    const sortFilter = document.getElementById('sortFilter');
+    if(sortFilter) sortFilter.addEventListener('change', applyFilters);
+
+    // CSS Animation Injector
+    const style = document.createElement('style');
+    style.innerHTML = `@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }`;
+    document.head.appendChild(style);
+
+    // --- 5. INITIALIZE ---
+    window.onload = () => {
+        initScrollReveal();
+        window.fetchAPIProjects(false); // Fetch initial batch on load
+    };
 </script>
 </html>
